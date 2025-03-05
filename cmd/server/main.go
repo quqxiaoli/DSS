@@ -1,9 +1,10 @@
 package main
 
 import (
-    "fmt"
+    "encoding/json"
     "net/http"
     "github.com/quqxiaoli/distributed-cache/pkg/cache"
+	"fmt"
 )
 
 func main() {
@@ -12,24 +13,62 @@ func main() {
     http.HandleFunc("/set", func(w http.ResponseWriter, r *http.Request) {
         key := r.URL.Query().Get("key")
         value := r.URL.Query().Get("value")
+        w.Header().Set("Content-Type", "application/json")
+        if key == "" || value == "" {
+            w.WriteHeader(http.StatusBadRequest)
+            json.NewEncoder(w).Encode(map[string]string{
+                "error": "Key or value cannot be empty",
+            })
+            return
+        }
         cache.Set(key, value)
-        fmt.Fprintf(w, "Set %s = %s\n", key, value)
+        json.NewEncoder(w).Encode(map[string]string{
+            "status": "ok",
+            "key":    key,
+            "value":  value,
+        })
     })
 
     http.HandleFunc("/get", func(w http.ResponseWriter, r *http.Request) {
         key := r.URL.Query().Get("key")
+        w.Header().Set("Content-Type", "application/json")
+        if key == "" {
+            w.WriteHeader(http.StatusBadRequest)
+            json.NewEncoder(w).Encode(map[string]string{
+                "error": "Key cannot be empty",
+            })
+            return
+        }
         value, exists := cache.Get(key)
         if exists {
-            fmt.Fprintf(w, "Value: %s\n", value)
+            json.NewEncoder(w).Encode(map[string]string{
+                "status": "ok",
+                "key":    key,
+                "value":  value,
+            })
         } else {
-            fmt.Fprintf(w, "Key not found\n")
+            json.NewEncoder(w).Encode(map[string]string{
+                "status": "not found",
+                "key":    key,
+            })
         }
     })
 
     http.HandleFunc("/delete", func(w http.ResponseWriter, r *http.Request) {
         key := r.URL.Query().Get("key")
+        w.Header().Set("Content-Type", "application/json")
+        if key == "" {
+            w.WriteHeader(http.StatusBadRequest)
+            json.NewEncoder(w).Encode(map[string]string{
+                "error": "Key cannot be empty",
+            })
+            return
+        }
         cache.Delete(key)
-        fmt.Fprintf(w, "Deleted key: %s\n", key)
+        json.NewEncoder(w).Encode(map[string]string{
+            "status": "ok",
+            "key":    key,
+        })
     })
 
     fmt.Println("Server running on :8080")
