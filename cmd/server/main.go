@@ -4,9 +4,15 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-
 	"github.com/quqxiaoli/distributed-cache/pkg/cache"
 )
+
+type Response struct {
+	Status string `json:"status"`
+	Key    string `json:"key,omitempty"`
+	Value  string `json:"value,omitempty"`
+	Error  string `json:"error,omitempty"`
+}
 
 func main() {
 	cache := cache.NewCache()
@@ -17,18 +23,23 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		if key == "" || value == "" {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Key or value cannot be empty",
-			})
+			json.NewEncoder(w).Encode(Response{Error: "Key or value cannot be empty"})
 			return
 		}
+		ch := make(chan error)
 		go func() {
 			cache.Set(key, value)
+			ch <- nil // 存成功
 		}()
-		json.NewEncoder(w).Encode(map[string]string{
-			"status": "ok",
-			"key":    key,
-			"value":  value,
+		if err := <-ch; err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(Response{Error: "Failed to set key"})
+			return
+		}
+		json.NewEncoder(w).Encode(Response{
+			Status: "ok",
+			Key:    key,
+			Value:  value,
 		})
 	})
 
@@ -37,22 +48,31 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		if key == "" {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Key cannot be empty",
-			})
+			json.NewEncoder(w).Encode(Response{Error: "Key cannot be empty"})
 			return
 		}
-		value, exists := cache.Get(key)
-		if exists {
-			json.NewEncoder(w).Encode(map[string]string{
-				"status": "ok",
-				"key":    key,
-				"value":  value,
+		ch := make(chan struct {
+			value  string
+			exists bool
+		})
+		go func() {
+			value, exists := cache.Get(key)
+			ch <- struct {
+				value  string
+				exists bool
+			}{value, exists}
+		}()
+		result := <-ch
+		if result.exists {
+			json.NewEncoder(w).Encode(Response{
+				Status: "ok",
+				Key:    key,
+				Value:  result.value,
 			})
 		} else {
-			json.NewEncoder(w).Encode(map[string]string{
-				"status": "not found",
-				"key":    key,
+			json.NewEncoder(w).Encode(Response{
+				Status: "not found",
+				Key:    key,
 			})
 		}
 	})
@@ -62,15 +82,22 @@ func main() {
 		w.Header().Set("Content-Type", "application/json")
 		if key == "" {
 			w.WriteHeader(http.StatusBadRequest)
-			json.NewEncoder(w).Encode(map[string]string{
-				"error": "Key cannot be empty",
-			})
+			json.NewEncoder(w).Encode(Response{Error: "Key cannot be empty"})
 			return
 		}
-		cache.Delete(key)
-		json.NewEncoder(w).Encode(map[string]string{
-			"status": "ok",
-			"key":    key,
+		ch := make(chan error)
+		go func() {
+			cache.Delete(key)
+			ch <- nil
+		}()
+		if err := <-ch; err != nil {
+			w.WriteHeader(http.StatusInternalServerError)
+			json.NewEncoder(w).Encode(Response{Error: "Failed to delete key"})
+			return
+		}
+		json.NewEncoder(w).Encode(Response{
+			Status: "ok",
+			Key:    key,
 		})
 	})
 
