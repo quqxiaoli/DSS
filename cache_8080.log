@@ -1,0 +1,3 @@
+[INFO localhost:8080] 2025/03/09 21:21:47 启动分布式缓存服务器...
+[INFO localhost:8080] 2025/03/09 21:22:21 Set request: key=foo, value=bar, node=localhost:8081
+[INFO localhost:8080] 2025/03/09 21:22:21 Sync request: key=foo, value=bar

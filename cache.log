@@ -2,3 +2,65 @@
 [INFO] 2025/03/08 18:43:13 Get request: key=foo
 [INFO] 2025/03/08 18:43:46 Get request: key=foo
 [INFO] 2025/03/09 12:17:05 启动分布式缓存服务器...
+[INFO] 2025/03/09 12:18:04 Set request: key=foo, value=bar, node=localhost:8080
+[INFO] 2025/03/09 12:18:04 Get request: key=foo, node=localhost:8080
+[INFO] 2025/03/09 12:54:32 启动分布式缓存服务器...
+[INFO] 2025/03/09 12:54:46 启动分布式缓存服务器...
+[INFO] 2025/03/09 12:55:01 启动分布式缓存服务器...
+[INFO] 2025/03/09 12:55:23 启动分布式缓存服务器...
+[INFO] 2025/03/09 12:55:45 启动分布式缓存服务器...
+[INFO] 2025/03/09 12:55:51 Set request: key=foo, value=bar, node=localhost:8080
+[INFO] 2025/03/09 12:55:51 Get request: key=foo, node=localhost:8080
+[INFO] 2025/03/09 13:09:49 启动分布式缓存服务器...
+[INFO] 2025/03/09 13:10:13 启动分布式缓存服务器...
+[INFO] 2025/03/09 13:10:28 启动分布式缓存服务器...
+[INFO] 2025/03/09 13:10:39 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:10:39 Set request: key=, value=, node=localhost:8082
+[INFO] 2025/03/09 13:10:52 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:10:52 Set request: key=, value=, node=localhost:8082
+[INFO] 2025/03/09 13:13:27 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:13:27 Set request: key=, value=, node=localhost:8082
+[INFO] 2025/03/09 13:13:32 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:13:32 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:13:41 Delete request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:13:41 Delete request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:14:16 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:14:16 Set request: key=, value=, node=localhost:8082
+[INFO] 2025/03/09 13:14:16 Set request: key=bar, value=baz, node=localhost:8082
+[INFO] 2025/03/09 13:14:16 Set request: key=, value=, node=localhost:8082
+[INFO] 2025/03/09 13:14:16 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:14:16 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:14:16 Get request: key=bar, node=localhost:8082
+[INFO] 2025/03/09 13:14:16 Get request: key=bar, node=localhost:8082
+[INFO] 2025/03/09 13:14:48 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:14:48 Set request: key=, value=, node=localhost:8082
+[INFO] 2025/03/09 13:19:00 启动分布式缓存服务器...
+[INFO] 2025/03/09 13:19:07 启动分布式缓存服务器...
+[INFO] 2025/03/09 13:19:12 启动分布式缓存服务器...
+[INFO] 2025/03/09 13:19:20 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:19:20 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:19:28 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:19:28 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:19:48 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:19:48 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 13:19:52 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:19:52 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:20:01 Delete request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 13:20:01 Delete request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 18:12:22 启动分布式缓存服务器...
+[INFO] 2025/03/09 18:12:39 启动分布式缓存服务器...
+[INFO] 2025/03/09 18:13:00 启动分布式缓存服务器...
+[INFO] 2025/03/09 18:13:08 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 18:13:08 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 18:13:08 Sync request: key=foo, value=bar
+[INFO] 2025/03/09 18:13:08 Sync request: key=foo, value=bar
+[INFO] 2025/03/09 18:13:08 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 18:13:08 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 18:13:08 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 18:20:53 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 18:20:53 Set request: key=foo, value=bar, node=localhost:8081
+[INFO] 2025/03/09 18:20:53 Sync request: key=foo, value=bar
+[INFO] 2025/03/09 18:20:53 Sync request: key=foo, value=bar
+[INFO] 2025/03/09 18:20:53 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 18:20:53 Get request: key=foo, node=localhost:8081
+[INFO] 2025/03/09 18:20:53 Get request: key=foo, node=localhost:8081
