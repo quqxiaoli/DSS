@@ -15,9 +15,6 @@ type Cache struct {
 	mu   sync.Mutex
 }
 
-func (c *Cache) NewHashRing(i int) any {
-	panic("unimplemented")
-}
 
 func NewCache() *Cache {
 	return &Cache{
