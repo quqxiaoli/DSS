@@ -1,0 +1,3 @@
+[INFO] 2025/03/08 18:43:13 Set request: key=foo, value=bar
+[INFO] 2025/03/08 18:43:13 Get request: key=foo
+[INFO] 2025/03/08 18:43:46 Get request: key=foo
