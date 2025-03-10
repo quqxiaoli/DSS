@@ -77,6 +77,7 @@ func forwardRequest(method, url, apiKey, key, value string) (*Response, error) {
 		Transport: &http.Transport{
 			TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // 新增：测试时跳过证书验证
 		},
+		Timeout: 2 * time.Second, // 新增：设置超时，避免卡住
 	}
 	resp, err := client.Do(req) //发送请求并获取响应
 	if err != nil {
@@ -122,6 +123,19 @@ func main() {
 
 	localAddr := *addr       //当前节点地址
 	nodes := ring.GetNodes() // 直接用 GetNodes。
+
+	// 新增：健康检查接口
+    http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+        apiKey := r.URL.Query().Get("api_key")
+        if apiKey != validAPIKey {
+            errorLogger.Printf("Invalid API key for health check: %s", apiKey)
+            w.WriteHeader(http.StatusUnauthorized)
+            json.NewEncoder(w).Encode(Response{Error: "Invalid API key"})
+            return
+        }
+        w.Header().Set("Content-Type", "application/json")
+        json.NewEncoder(w).Encode(Response{Status: "ok"})
+    })
 
 	//处理其他节点的同步请求
 	http.HandleFunc("/sync", func(w http.ResponseWriter, r *http.Request) {
@@ -312,11 +326,13 @@ func main() {
 		}
 	})
 
-	// fmt.Printf("Server running on :%s\n", *port)
-	// http.ListenAndServe(":"+*port, nil)
-	fmt.Printf("Server running on https://localhost:%s\n", *port)
-	err = http.ListenAndServeTLS(":"+*port, "cert.pem", "key.pem", nil)
-	if err != nil {
-		log.Fatalf("Failed to start TLS server: %v", err)
-	}
+	// 新增：启动心跳检测
+    hb := cache.NewHeartbeat(ring, localAddr, validAPIKey, infoLogger, errorLogger)
+    hb.Start()
+
+    fmt.Printf("Server running on https://localhost:%s\n", *port)
+    err = http.ListenAndServeTLS(":"+*port, "cert.pem", "key.pem", nil)
+    if err != nil {
+        log.Fatalf("Failed to start TLS server: %v", err)
+    }
 }
