@@ -15,11 +15,12 @@ type Cache struct {
 	mu   sync.Mutex
 }
 
-
 func NewCache() *Cache {
-	return &Cache{
+	c := &Cache{
 		data: make(map[string]CacheItem),
 	}
+	go c.startCleanup(10 * time.Second) // 新增：启动清理 Goroutine，每10秒检查一次
+	return c
 }
 
 func (c *Cache) Set(key, value string) {
@@ -46,4 +47,18 @@ func (c *Cache) Delete(key string) { // 方法：删除缓存。
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	delete(c.data, key) // 函数：从 map 删除。
+}
+
+func (c *Cache) startCleanup(interval time.Duration) {
+	ticker := time.NewTicker(interval)
+	for range ticker.C {
+		c.mu.Lock()
+		now := time.Now()
+		for key, item := range c.data {
+			if now.After(item.expiresAt) {
+				delete(c.data, key) // 删除过期项
+			}
+		}
+		c.mu.Unlock()
+	}
 }
