@@ -52,7 +52,6 @@ func handleGets(localCache *cache.Cache, ch chan GetRequest) {
 	}
 }
 
-// forwaedRequest 转发HTTP 请求到其他节点
 // forwardRequest 转发 HTTP 请求到其他节点
 func forwardRequest(method, url, apiKey, key, value string) (*Response, error) {
 	var req *http.Request // 请求对象：待构造的 HTTP 请求
@@ -72,6 +71,9 @@ func forwardRequest(method, url, apiKey, key, value string) (*Response, error) {
 		jsonBody, _ := json.Marshal(body)                     // 转换为 JSON
 		req, err = http.NewRequest(method, url+"?api_key="+apiKey, bytes.NewBuffer(jsonBody))
 		req.Header.Set("Content-Type", "application/json") // 设置请求头：指定 JSON 格式
+		if strings.HasSuffix(url, "/set") {                // 新增：只对 /set 请求添加 X-Forwarded
+			req.Header.Set("X-Forwarded", "true")
+		}
 	} else if method == http.MethodDelete { // DELETE 请求：删除键值
 		req, err = http.NewRequest(method, url+"?key="+key+"&api_key="+apiKey, nil)
 	}
@@ -139,7 +141,8 @@ func main() {
 	getCh := make(chan GetRequest, 10) //带缓冲通道用于/get请求
 	go handleGets(localCache, getCh)   //启动go协程处理并发查询
 
-	ring := cache.NewHashRing(3) //创建一致性哈希环，三个副本
+	// 修改：增加虚拟节点数为 100
+	ring := cache.NewHashRing(100)
 	ring.AddNode("localhost:8080")
 	ring.AddNode("localhost:8081")
 	ring.AddNode("localhost:8082")
@@ -182,9 +185,9 @@ func main() {
 			json.NewEncoder(w).Encode(Response{Error: "Key or value cannot be empty"})
 			return
 		}
-		localCache.Set(key, value)                                      //存入本地缓存
-		infoLogger.Printf("Sync request: key=%s, value=%s", key, value) //同步日志
-		w.Header().Set("Content-Type", "application/json")              //设置响应头为JSON
+		localCache.Set(key, value)                                       //存入本地缓存
+		infoLogger.Printf("Sync received: key=%s, value=%s", key, value) // 区分日志
+		w.Header().Set("Content-Type", "application/json")
 		json.NewEncoder(w).Encode(Response{Status: "ok", Key: key, Value: value})
 	})
 
@@ -215,7 +218,10 @@ func main() {
 		}
 
 		node := ring.GetNode(key) //用一致性哈希确定目标节点
-		infoLogger.Printf("Set request: key=%s, value=%s, node=%s", key, value, node)
+		// 只在首次请求（客户端通过 8080 发起）记录 Set request
+		if r.Header.Get("X-Forwarded") != "true" {
+			infoLogger.Printf("Set request: key=%s, value=%s, target node=%s", key, value, node)
+		}
 		w.Header().Set("Content-Type", "application/json")
 		if key == "" || value == "" {
 			w.WriteHeader(http.StatusBadRequest)
@@ -255,8 +261,8 @@ func main() {
 				json.NewEncoder(w).Encode(Response{Error: "Failed to forward request"})
 				return
 			}
-			localCache.Set(key, value)      // 转发后存本地。
-			json.NewEncoder(w).Encode(resp) //响应转发结果
+			localCache.Set(key, value)      // 转发后存本地
+			json.NewEncoder(w).Encode(resp) // 响应转发结果
 		}
 	})
 
