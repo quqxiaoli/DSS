@@ -414,13 +414,13 @@ func main() {
 	// 配置 TLS 并启用会话缓存
 	server := &http.Server{
 		Addr: ":" + *port,
-		TLSConfig: &tls.Config{
-			InsecureSkipVerify: true,
-			ClientSessionCache: tls.NewLRUClientSessionCache(5000), // 增加容量
-			SessionTicketsDisabled: false,
-			MinVersion: tls.VersionTLS13, // 强制 TLS 1.3（更快）
-			PreferServerCipherSuites: true,
-			CurvePreferences: []tls.CurveID{tls.X25519}, // 只用最快曲线
+        TLSConfig: &tls.Config{
+        InsecureSkipVerify: true,           // 调试用，跳过证书验证
+        ClientSessionCache: tls.NewLRUClientSessionCache(5000), // TLS 会话缓存
+        SessionTicketsDisabled: false,      // 启用会话票据
+        MinVersion: tls.VersionTLS12,       // 修改为 TLS 1.2
+        PreferServerCipherSuites: true,     // 服务器优先选择加密套件
+        CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256}, // 支持多种曲线
 		},
 		ReadTimeout:  70 * time.Second,
 		WriteTimeout: 70 * time.Second,
