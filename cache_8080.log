@@ -1,3 +1,1456 @@
-Server running on https://localhost:8080
-2025/03/10 17:39:11 main.go:320: Failed to start TLS server: listen tcp :8080: bind: address already in use
-exit status 1
+[INFO localhost:8080] 2025/03/13 14:40:56 启动分布式缓存服务器...
+[INFO localhost:8080] 2025/03/13 14:40:56 Waiting for nodes to initialize...
+[ERROR localhost:8080] 2025/03/13 14:41:01 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 14:41:01 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 1
+[INFO localhost:8080] 2025/03/13 14:41:01 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:01 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:01 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:06 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:06 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:06 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:06 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:06 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:06 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:11 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:11 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:11 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:11 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:11 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:11 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:16 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:16 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:16 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:16 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:16 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:16 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:21 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:21 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:21 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:21 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:21 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:21 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:26 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:26 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:26 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:26 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:26 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:26 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:31 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:31 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:31 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:31 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:31 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:31 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:36 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:36 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:36 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:36 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:36 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:36 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:41 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:41 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:41 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:41 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:41 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:41 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:46 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:46 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:46 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:46 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:46 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:46 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:51 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:51 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:51 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:51 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:51 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:51 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:56 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:56 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:56 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:41:56 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:41:56 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:41:56 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:01 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:01 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:01 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:01 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:01 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:01 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:06 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:06 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:06 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:06 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:06 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:06 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:11 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:11 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:11 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:11 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:11 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:11 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:12 Get request: key=key1, target node=localhost:8080
+[INFO localhost:8080] 2025/03/13 14:42:16 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:16 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:16 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:16 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:16 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:16 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:21 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:21 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:21 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:21 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:21 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:21 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:26 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:26 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:26 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:26 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:26 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:26 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:31 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:31 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:31 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:31 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:31 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:31 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:36 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:36 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:36 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:36 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:36 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:36 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:41 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:41 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:41 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:41 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:41 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:41 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:46 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:46 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:46 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:46 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:46 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:46 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:51 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:51 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:51 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:51 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:51 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:51 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:56 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:56 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:56 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:42:56 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:42:56 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:42:56 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:01 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:01 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:01 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:01 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:01 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:01 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:06 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:06 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:06 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:06 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:06 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:06 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:11 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:11 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:11 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:11 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:11 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:11 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:16 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:16 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:16 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:16 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:16 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:16 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:21 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:21 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:21 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:21 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:21 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:21 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:26 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:26 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:26 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:26 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:26 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:26 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:31 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:31 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:31 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:31 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:31 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:31 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:36 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:36 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:36 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:36 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:36 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:36 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:41 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:41 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:41 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:41 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:41 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:41 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:46 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:46 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:46 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:46 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:46 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:46 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:51 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:51 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:51 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:51 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:51 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:51 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:56 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:56 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:56 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:43:56 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:43:56 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:43:56 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:01 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:01 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:01 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:01 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:01 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:01 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:06 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:06 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:06 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:06 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:06 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:06 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:11 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:11 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:11 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:11 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:11 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:11 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:16 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:16 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:16 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:16 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:16 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:16 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:21 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:21 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:21 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:21 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:21 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:21 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:26 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:26 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:26 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:26 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:26 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:26 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:31 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:31 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:31 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:31 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:31 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:31 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:36 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:36 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:36 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:42 Health check to localhost:8081 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:42 Health check to localhost:8081 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:42 Node localhost:8081 is healthy
+[INFO localhost:8080] 2025/03/13 14:44:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:42 Node localhost:8082 is healthy
+[ERROR localhost:8080] 2025/03/13 14:44:47 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 14:44:47 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 1
+[INFO localhost:8080] 2025/03/13 14:44:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:47 Node localhost:8082 is healthy
+[ERROR localhost:8080] 2025/03/13 14:44:52 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 14:44:52 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 2
+[INFO localhost:8080] 2025/03/13 14:44:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:52 Node localhost:8082 is healthy
+[ERROR localhost:8080] 2025/03/13 14:44:57 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 14:44:57 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 3
+[ERROR localhost:8080] 2025/03/13 14:44:57 Node localhost:8081 confirmed unhealthy, removing from ring
+[INFO localhost:8080] 2025/03/13 14:44:57 Starting data migration from failed node localhost:8081
+[INFO localhost:8080] 2025/03/13 14:44:57 Data migration from localhost:8081 completed
+[INFO localhost:8080] 2025/03/13 14:44:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:44:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:44:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:45:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:45:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:45:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:46:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:46:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:46:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:47:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:47:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:47:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:48:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:48:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:48:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:49:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:49:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:49:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:50:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:50:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:50:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:51:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:51:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:51:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:52:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:52:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:52:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:53:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:53:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:53:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:54:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:54:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:54:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:55:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:55:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:55:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:56:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:56:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:56:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:57:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:57:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:57:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:58:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:58:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:58:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 14:59:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 14:59:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 14:59:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:42 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:42 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:42 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:47 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:47 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:47 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:52 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:52 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:52 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:00:57 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:00:57 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:00:57 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:02 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:02 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:02 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:07 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:07 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:07 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:12 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:12 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:12 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:17 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:17 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:17 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:22 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:22 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:22 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:27 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:27 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:27 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:32 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:32 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:32 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:37 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:37 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:37 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:01:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:01:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:01:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:02:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:02:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:02:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:03:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:03:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:03:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:04:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:04:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:04:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:05:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:05:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:05:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:06:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:06:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:06:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:07:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:07:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:07:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:08:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:08:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:08:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:09:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:09:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:09:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:10:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:10:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:10:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:11:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:11:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:11:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:12:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:12:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:12:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:13:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:13:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:13:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:14:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:14:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:14:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:18 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:18 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:18 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:23 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:23 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:23 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:28 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:28 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:28 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:33 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:33 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:33 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:38 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:38 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:38 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:43 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:43 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:43 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:48 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:48 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:48 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:53 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:53 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:53 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:15:58 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:15:58 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:15:58 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:16:03 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:16:03 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:16:03 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:16:08 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:16:08 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:16:08 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:16:13 Health check to localhost:8082 returned status code: 200
+[INFO localhost:8080] 2025/03/13 15:16:13 Health check to localhost:8082 returned status: ok
+[INFO localhost:8080] 2025/03/13 15:16:13 Node localhost:8082 is healthy
+[INFO localhost:8080] 2025/03/13 15:16:37 启动分布式缓存服务器...
+[INFO localhost:8080] 2025/03/13 15:16:37 Waiting for nodes to initialize...
+[ERROR localhost:8080] 2025/03/13 15:16:42 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:42 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 1
+[ERROR localhost:8080] 2025/03/13 15:16:42 Health check to localhost:8082 failed: Get "https://localhost:8082/health?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:42 Node localhost:8082 check failed: Get "https://localhost:8082/health?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused, failures: 1
+[ERROR localhost:8080] 2025/03/13 15:16:47 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:47 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 2
+[ERROR localhost:8080] 2025/03/13 15:16:47 Health check to localhost:8082 failed: Get "https://localhost:8082/health?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:47 Node localhost:8082 check failed: Get "https://localhost:8082/health?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused, failures: 2
+[INFO localhost:8080] 2025/03/13 15:16:48 Set request: key=test, value=123, target node=localhost:8080
+[INFO localhost:8080] 2025/03/13 15:16:48 Forwarding request to: https://localhost:8081/sync
+[ERROR localhost:8080] 2025/03/13 15:16:48 Forward request to https://localhost:8081/sync failed after 972.005µs: Post "https://localhost:8081/sync?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:48 Failed to sync to localhost:8081 (attempt 1/3): Post "https://localhost:8081/sync?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, duration: 1.306851ms
+[INFO localhost:8080] 2025/03/13 15:16:48 Get request: key=test, target node=localhost:8080
+[INFO localhost:8080] 2025/03/13 15:16:48 Get request: key=missing, target node=localhost:8080
+[INFO localhost:8080] 2025/03/13 15:16:49 Forwarding request to: https://localhost:8081/sync
+[ERROR localhost:8080] 2025/03/13 15:16:49 Forward request to https://localhost:8081/sync failed after 1.085963ms: Post "https://localhost:8081/sync?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:49 Failed to sync to localhost:8081 (attempt 2/3): Post "https://localhost:8081/sync?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, duration: 1.231281ms
+[INFO localhost:8080] 2025/03/13 15:16:50 Forwarding request to: https://localhost:8081/sync
+[ERROR localhost:8080] 2025/03/13 15:16:50 Forward request to https://localhost:8081/sync failed after 973.37µs: Post "https://localhost:8081/sync?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:50 Failed to sync to localhost:8081 (attempt 3/3): Post "https://localhost:8081/sync?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, duration: 1.123611ms
+[INFO localhost:8080] 2025/03/13 15:16:50 Forwarding request to: https://localhost:8082/sync
+[ERROR localhost:8080] 2025/03/13 15:16:50 Forward request to https://localhost:8082/sync failed after 695.576µs: Post "https://localhost:8082/sync?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:50 Failed to sync to localhost:8082 (attempt 1/3): Post "https://localhost:8082/sync?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused, duration: 749.079µs
+[INFO localhost:8080] 2025/03/13 15:16:51 Forwarding request to: https://localhost:8082/sync
+[ERROR localhost:8080] 2025/03/13 15:16:51 Forward request to https://localhost:8082/sync failed after 913.703µs: Post "https://localhost:8082/sync?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:51 Failed to sync to localhost:8082 (attempt 2/3): Post "https://localhost:8082/sync?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused, duration: 1.108363ms
+[ERROR localhost:8080] 2025/03/13 15:16:52 Health check to localhost:8081 failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:52 Node localhost:8081 check failed: Get "https://localhost:8081/health?api_key=my-secret-key": dial tcp [::1]:8081: connect: connection refused, failures: 3
+[ERROR localhost:8080] 2025/03/13 15:16:52 Node localhost:8081 confirmed unhealthy, removing from ring
+[INFO localhost:8080] 2025/03/13 15:16:52 Starting data migration from failed node localhost:8081
+[INFO localhost:8080] 2025/03/13 15:16:52 Data migration from localhost:8081 completed
+[ERROR localhost:8080] 2025/03/13 15:16:52 Health check to localhost:8082 failed: Get "https://localhost:8082/health?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:52 Node localhost:8082 check failed: Get "https://localhost:8082/health?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused, failures: 3
+[ERROR localhost:8080] 2025/03/13 15:16:52 Node localhost:8082 confirmed unhealthy, removing from ring
+[INFO localhost:8080] 2025/03/13 15:16:52 Starting data migration from failed node localhost:8082
+[INFO localhost:8080] 2025/03/13 15:16:52 Data migration from localhost:8082 completed
+[INFO localhost:8080] 2025/03/13 15:16:52 Forwarding request to: https://localhost:8082/sync
+[ERROR localhost:8080] 2025/03/13 15:16:52 Forward request to https://localhost:8082/sync failed after 1.129771ms: Post "https://localhost:8082/sync?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused
+[ERROR localhost:8080] 2025/03/13 15:16:52 Failed to sync to localhost:8082 (attempt 3/3): Post "https://localhost:8082/sync?api_key=my-secret-key": dial tcp [::1]:8082: connect: connection refused, duration: 1.301148ms

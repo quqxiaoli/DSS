@@ -4,6 +4,14 @@ import (
 	"container/list"
 	"sync"
 	"time"
+	"expvar"  //暴露指标
+)
+
+// 定义全局监控指标
+var (
+    CacheHits     = expvar.NewInt("cache_hits")     // 缓存命中次数
+    CacheMisses   = expvar.NewInt("cache_misses")   // 缓存未命中次数
+    CacheRequests = expvar.NewInt("cache_requests") // 总请求次数
 )
 
 type CacheItem struct {
@@ -62,26 +70,6 @@ func (c *Cache) Set(key, value string) { // 暂不加 TTL 参数，后续扩展
 	c.data[key] = elem             // 存入 map
 }
 
-func (c *Cache) Get(key string) (string, bool) {
-	c.mu.Lock()
-	defer c.mu.Unlock()
-
-	elem, exists := c.data[key]
-	if !exists {
-		return "", false
-	}
-
-	item := elem.Value.(*CacheItem)
-	if time.Now().After(item.ExpiresAt) {
-		c.list.Remove(elem)
-		delete(c.data, key)
-		return "", false
-	}
-
-	c.list.MoveToFront(elem) // 更新使用顺序
-	return item.Value, true
-}
-
 func (c *Cache) Delete(key string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
@@ -108,4 +96,44 @@ func (c *Cache) startCleanup(interval time.Duration) {
 		}
 		c.mu.Unlock()
 	}
+}
+
+func (c *Cache) GetAll() map[string]string {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+
+	result := make(map[string]string)
+	now := time.Now()
+	for key, elem := range c.data {
+		item := elem.Value.(*CacheItem)
+		if now.Before(item.ExpiresAt) { // 只返回未过期的
+			result[key] = item.Value
+		}
+	}
+	return result
+}
+
+func (c *Cache) Get(key string) (string, bool) {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+
+    CacheRequests.Add(1) // 每次 Get 请求计数加 1
+
+    elem, exists := c.data[key]
+    if !exists {
+        CacheMisses.Add(1) // 键不存在，记录未命中
+        return "", false
+    }
+
+    item := elem.Value.(*CacheItem)
+    if time.Now().After(item.ExpiresAt) {
+        c.list.Remove(elem)
+        delete(c.data, key)
+        CacheMisses.Add(1) // 键已过期，记录未命中
+        return "", false
+    }
+
+    c.list.MoveToFront(elem)
+    CacheHits.Add(1) // 键有效，记录命中
+    return item.Value, true
 }

@@ -12,8 +12,14 @@ import (
 	"os"            //文件操作
 	"strings"       //检查字符串前缀
 	"time"          //时间处理
-
+    "expvar"        //暴露指标
 	"github.com/quqxiaoli/distributed-cache/pkg/cache"
+)
+
+// 定义请求延迟指标
+var (
+    getLatency = expvar.NewFloat("get_latency") // /get 请求平均延迟（秒）
+    setLatency = expvar.NewFloat("set_latency") // /set 请求平均延迟（秒）
 )
 
 // HTTP相应的JSON结构
@@ -193,6 +199,16 @@ func main() {
 
 	//处理set请求
 	http.HandleFunc("/set", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now() // 记录请求开始时间
+        defer func() {
+            duration := time.Since(start).Seconds()                  // 计算本次请求耗时
+            totalRequests := cache.CacheRequests.Value()             // 获取总请求次数
+            if totalRequests > 0 {                                   // 避免除以零
+                // 更新平均延迟：(旧平均值 * (n-1) + 新值) / n
+                getLatency.Set((getLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
+            }
+        }()
+		
 		apiKey := r.URL.Query().Get("api_key")
 		if apiKey != validAPIKey {
 			errorLogger.Printf("Invalid API key: %s", apiKey)
@@ -218,10 +234,6 @@ func main() {
 		}
 
 		node := ring.GetNode(key) //用一致性哈希确定目标节点
-		// 只在首次请求（客户端通过 8080 发起）记录 Set request
-		if r.Header.Get("X-Forwarded") != "true" {
-			infoLogger.Printf("Set request: key=%s, value=%s, target node=%s", key, value, node)
-		}
 		w.Header().Set("Content-Type", "application/json")
 		if key == "" || value == "" {
 			w.WriteHeader(http.StatusBadRequest)
@@ -230,6 +242,7 @@ func main() {
 		}
 
 		if node == localAddr { //如果当前节点是目标节点
+			infoLogger.Printf("Set request: key=%s, value=%s, target node=%s", key, value, node)
 			localCache.Set(key, value) // 先存本地。
 			go func() {                //异步广播给其他节点
 				for _, n := range nodes { //遍历节点
@@ -268,6 +281,16 @@ func main() {
 
 	//处理get请求
 	http.HandleFunc("/get", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now() // 记录请求开始时间
+        defer func() {
+            duration := time.Since(start).Seconds()                  // 计算本次请求耗时
+            totalRequests := cache.CacheRequests.Value()             // 获取总请求次数
+            if totalRequests > 0 {                                   // 避免除以零
+                // 更新平均延迟：(旧平均值 * (n-1) + 新值) / n
+                setLatency.Set((setLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
+            }
+        }()
+
 		apiKey := r.URL.Query().Get("api_key")
 		if apiKey != validAPIKey {
 			errorLogger.Printf("Invalid API key: %s", apiKey)
@@ -356,8 +379,8 @@ func main() {
 	})
 
 	// 新增：启动心跳检测
-	//hb := cache.NewHeartbeat(ring, localAddr, validAPIKey, infoLogger, errorLogger)
-	//hb.Start()
+	hb := cache.NewHeartbeat(ring, localAddr, validAPIKey, infoLogger, errorLogger, localCache)
+	hb.Start()
 
 	fmt.Printf("Server running on https://localhost:%s\n", *port)
 	err = http.ListenAndServeTLS(":"+*port, "cert.pem", "key.pem", nil)

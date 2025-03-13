@@ -1,88 +1,152 @@
-// pkg/cache/heartbeat.go
 package cache
 
 import (
 	"crypto/tls"
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
 	"time"
 )
 
-// Heartbeat 结构体保存心跳检测的状态和配置
 type Heartbeat struct {
-    ring        *HashRing   // 一致性哈希环，用于获取节点列表
-    localAddr   string      // 本地节点地址
-    apiKey      string      // API 密钥，用于健康检查请求
-    infoLogger  *log.Logger // 信息日志
-    errorLogger *log.Logger // 错误日志
+	ring        *HashRing
+	localAddr   string
+	apiKey      string
+	infoLogger  *log.Logger
+	errorLogger *log.Logger
+	failures    map[string]int
+	client      *http.Client
+	cache       *Cache
 }
 
-// NewHeartbeat 创建一个心跳检测实例
-func NewHeartbeat(ring *HashRing, localAddr, apiKey string, infoLogger, errorLogger *log.Logger) *Heartbeat {
-    return &Heartbeat{
-        ring:        ring,
-        localAddr:   localAddr,
-        apiKey:      apiKey,
-        infoLogger:  infoLogger,
-        errorLogger: errorLogger,
-    }
+func NewHeartbeat(ring *HashRing, localAddr, apiKey string, infoLogger, errorLogger *log.Logger, cache *Cache) *Heartbeat {
+	return &Heartbeat{
+		ring:        ring,
+		localAddr:   localAddr,
+		apiKey:      apiKey,
+		infoLogger:  infoLogger,
+		errorLogger: errorLogger,
+		failures:    make(map[string]int),
+		client: &http.Client{
+			Timeout: 3 * time.Second,
+			Transport: &http.Transport{
+				TLSClientConfig:   &tls.Config{InsecureSkipVerify: true},
+				MaxIdleConns:      100,
+				IdleConnTimeout:   90 * time.Second,
+				DisableKeepAlives: false,
+			},
+		},
+		cache: cache,
+	}
 }
 
-// Start 开始心跳检测
 func (h *Heartbeat) Start() {
-    go func() { // 在后台运行
-        for {
-            nodes := h.ring.GetNodes() // 获取所有节点
-            for _, node := range nodes {
-                if node != h.localAddr { // 不检查自己
-                    // 发送健康检查请求
-                    resp, err := h.checkHealth(node)
-                    if err != nil {
-                        h.errorLogger.Printf("Node %s is unhealthy: %v", node, err)
-                    } else if resp.Status != "ok" {
-                        h.errorLogger.Printf("Node %s returned unexpected status: %s", node, resp.Status)
-                    } else {
-                        h.infoLogger.Printf("Node %s is healthy", node)
-                    }
-                }
-            }
-            time.Sleep(5 * time.Second) // 每 5 秒检查一次
-        }
-    }()
+	h.infoLogger.Printf("Waiting for nodes to initialize...")
+	time.Sleep(5 * time.Second)
+	go func() {
+		for {
+			nodes := h.ring.GetNodes()
+			for _, node := range nodes {
+				if node != h.localAddr {
+					resp, err := h.checkHealth(node)
+					if err != nil || resp.Status != "ok" {
+						h.failures[node]++
+						if err != nil {
+							h.errorLogger.Printf("Node %s check failed: %v, failures: %d", node, err, h.failures[node])
+						} else {
+							h.errorLogger.Printf("Node %s status %s, failures: %d", node, resp.Status, h.failures[node])
+						}
+						if h.failures[node] >= 3 {
+							h.errorLogger.Printf("Node %s confirmed unhealthy, removing from ring", node)
+							h.ring.RemoveNode(node)
+							h.migrateData(node)
+							delete(h.failures, node)
+						}
+					} else {
+						h.infoLogger.Printf("Node %s is healthy", node)
+						h.failures[node] = 0
+					}
+				}
+			}
+			time.Sleep(5 * time.Second)
+		}
+	}()
 }
 
-// checkHealth 发送健康检查请求到指定节点
+func (h *Heartbeat) migrateData(failedNode string) {
+	h.infoLogger.Printf("Starting data migration from failed node %s", failedNode)
+
+	for key, value := range h.cache.GetAll() {
+		oldNode := h.ring.GetNodeForKeyBeforeRemoval(key, failedNode)
+		if oldNode == failedNode {
+			newNode := h.ring.GetNode(key)
+			if newNode != h.localAddr {
+				err := h.sendDataToNode(newNode, key, value)
+				if err != nil {
+					h.errorLogger.Printf("Failed to migrate key %s to %s: %v", key, newNode, err)
+				} else {
+					h.infoLogger.Printf("Migrated key %s from %s to %s", key, failedNode, newNode)
+				}
+			} else {
+				h.infoLogger.Printf("Key %s stays on local node %s", key, h.localAddr)
+			}
+		}
+	}
+	h.infoLogger.Printf("Data migration from %s completed", failedNode)
+}
+
+func (h *Heartbeat) sendDataToNode(node, key, value string) error {
+	url := "https://" + node + "/set"
+	reqBody := fmt.Sprintf(`{"key": "%s", "value": "%s"}`, key, value)
+	req, err := http.NewRequest(http.MethodPost, url+"?api_key="+h.apiKey, strings.NewReader(reqBody))
+	if err != nil {
+		return err
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := h.client.Do(req)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return fmt.Errorf("unexpected status code: %d", resp.StatusCode)
+	}
+	return nil
+}
+
 func (h *Heartbeat) checkHealth(node string) (*Response, error) {
-    url := "https://" + node + "/health"
-    if !strings.HasPrefix(node, "http://") && !strings.HasPrefix(node, "https://") {
-        url = "https://" + node + "/health"
-    }
-
-    req, err := http.NewRequest(http.MethodGet, url+"?api_key="+h.apiKey, nil)
-    if err != nil {
-        return nil, err
-    }
-
-    client := &http.Client{
-        Timeout: 2 * time.Second, // 设置 2 秒超时
-        Transport: &http.Transport{
-            TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // 跳过证书验证
-        },
-    }
-    resp, err := client.Do(req)
-    if err != nil {
-        return nil, err
-    }
-    defer resp.Body.Close()
-
-    var response Response
-    err = json.NewDecoder(resp.Body).Decode(&response)
-    return &response, err
+	url := "https://" + node + "/health"
+	if !strings.HasPrefix(node, "http://") && !strings.HasPrefix(node, "https://") {
+		url = "https://" + node + "/health"
+	}
+	req, err := http.NewRequest(http.MethodGet, url+"?api_key="+h.apiKey, nil)
+	if err != nil {
+		return nil, err
+	}
+	resp, err := h.client.Do(req)
+	if err != nil {
+		h.errorLogger.Printf("Health check to %s failed: %v", node, err)
+		return nil, err
+	}
+	defer resp.Body.Close()
+	h.infoLogger.Printf("Health check to %s returned status code: %d", node, resp.StatusCode)
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("unexpected status code: %d", resp.StatusCode)
+	}
+	var response Response
+	err = json.NewDecoder(resp.Body).Decode(&response)
+	if err != nil {
+		h.errorLogger.Printf("Failed to decode response from %s: %v", node, err)
+		return nil, err
+	}
+	h.infoLogger.Printf("Health check to %s returned status: %s", node, response.Status)
+	return &response, nil
 }
 
-// Response 结构体，用于解析健康检查响应
 type Response struct {
-    Status string `json:"status"`
+	Status string `json:"status"`
 }
