@@ -3,23 +3,48 @@ package main
 import (
 	"bytes" //处理POST请求的字节缓冲区
 	"crypto/tls"
-	"encoding/json" //处理JSON数据
-	"flag"          //解析命令行参数
-	"fmt"           //格式化输出
-	"io"            //读取 HTTP 响应体
-	"log"           //日志记录
-	"net/http"      //实现HTTP服务器和客户端
-	"os"            //文件操作
-	"strings"       //检查字符串前缀
-	"time"          //时间处理
-    "expvar"        //暴露指标
+	"encoding/json"    //处理JSON数据
+	"expvar"           //暴露指标
+	"flag"             //解析命令行参数
+	"fmt"              //格式化输出
+	"io"               //读取 HTTP 响应体
+	"log"              //日志记录
+	"net/http"         //实现HTTP服务器和客户端
+	_ "net/http/pprof" // 引入 pprof，注册 /debug/pprof 端点
+	"os"               //文件操作
+	"strings"          //检查字符串前缀
+	"time"             //时间处理
+    "compress/gzip"
 	"github.com/quqxiaoli/distributed-cache/pkg/cache"
 )
 
+func gzipHandler(h http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+            h.ServeHTTP(w, r)
+            return
+        }
+        w.Header().Set("Content-Encoding", "gzip")
+        gz := gzip.NewWriter(w)
+        defer gz.Close()
+        gzw := gzipResponseWriter{Writer: gz, ResponseWriter: w}
+        h.ServeHTTP(gzw, r)
+    })
+}
+
+type gzipResponseWriter struct {
+    io.Writer
+    http.ResponseWriter
+}
+
+func (w gzipResponseWriter) Write(b []byte) (int, error) {
+    return w.Writer.Write(b)
+}
+
 // 定义请求延迟指标
 var (
-    getLatency = expvar.NewFloat("get_latency") // /get 请求平均延迟（秒）
-    setLatency = expvar.NewFloat("set_latency") // /set 请求平均延迟（秒）
+	getLatency = expvar.NewFloat("get_latency") // /get 请求平均延迟（秒）
+	setLatency = expvar.NewFloat("set_latency") // /set 请求平均延迟（秒）
 )
 
 // HTTP相应的JSON结构
@@ -44,6 +69,18 @@ var (
 	infoLogger  *log.Logger //普通日志
 	errorLogger *log.Logger //错误日志
 )
+
+var globalClient = &http.Client{
+	Transport: &http.Transport{
+		TLSClientConfig:     &tls.Config{InsecureSkipVerify: true},
+		MaxIdleConns:        100, // 最大空闲连接数
+		MaxIdleConnsPerHost: 100, // 每个主机最大空闲连接数
+		IdleConnTimeout:     90 * time.Second,
+		DisableKeepAlives:   false, // 启用 Keep-Alive
+		TLSHandshakeTimeout: 10 * time.Second,
+	},
+	Timeout: 5 * time.Second,
+}
 
 const validAPIKey = "my-secret-key" //密匙
 
@@ -88,19 +125,11 @@ func forwardRequest(method, url, apiKey, key, value string) (*Response, error) {
 		return nil, err
 	}
 
-	// 创建 HTTP 客户端
-	client := &http.Client{
-		Transport: &http.Transport{
-			TLSClientConfig: &tls.Config{InsecureSkipVerify: true}, // 测试时跳过证书验证
-		},
-		Timeout: 5 * time.Second, // 设置超时时间为 5 秒
-	}
-
 	// 发送请求并计时
-	start := time.Now()           // 新增：记录请求开始时间
-	resp, err := client.Do(req)   // 发送请求并获取响应
-	duration := time.Since(start) // 新增：计算请求耗时
-	if err != nil {               // 检查请求是否失败
+	start := time.Now()               // 新增：记录请求开始时间
+	resp, err := globalClient.Do(req) // 使用全局客户端
+	duration := time.Since(start)     // 新增：计算请求耗时
+	if err != nil {                   // 检查请求是否失败
 		errorLogger.Printf("Forward request to %s failed after %v: %v", url, duration, err)
 		return nil, err
 	}
@@ -126,6 +155,7 @@ func forwardRequest(method, url, apiKey, key, value string) (*Response, error) {
 }
 
 func main() {
+	
 	//解析命令行参数
 	port := flag.String("port", "8080", "server port") //参数：服务器端口，默认8080
 	flag.Parse()                                       //解析命令行输入
@@ -200,15 +230,15 @@ func main() {
 	//处理set请求
 	http.HandleFunc("/set", func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now() // 记录请求开始时间
-        defer func() {
-            duration := time.Since(start).Seconds()                  // 计算本次请求耗时
-            totalRequests := cache.CacheRequests.Value()             // 获取总请求次数
-            if totalRequests > 0 {                                   // 避免除以零
-                // 更新平均延迟：(旧平均值 * (n-1) + 新值) / n
-                getLatency.Set((getLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
-            }
-        }()
-		
+		defer func() {
+			duration := time.Since(start).Seconds()      // 计算本次请求耗时
+			totalRequests := cache.CacheRequests.Value() // 获取总请求次数
+			if totalRequests > 0 {                       // 避免除以零
+				// 更新平均延迟：(旧平均值 * (n-1) + 新值) / n
+				getLatency.Set((getLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
+			}
+		}()
+
 		apiKey := r.URL.Query().Get("api_key")
 		if apiKey != validAPIKey {
 			errorLogger.Printf("Invalid API key: %s", apiKey)
@@ -282,14 +312,14 @@ func main() {
 	//处理get请求
 	http.HandleFunc("/get", func(w http.ResponseWriter, r *http.Request) {
 		start := time.Now() // 记录请求开始时间
-        defer func() {
-            duration := time.Since(start).Seconds()                  // 计算本次请求耗时
-            totalRequests := cache.CacheRequests.Value()             // 获取总请求次数
-            if totalRequests > 0 {                                   // 避免除以零
-                // 更新平均延迟：(旧平均值 * (n-1) + 新值) / n
-                setLatency.Set((setLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
-            }
-        }()
+		defer func() {
+			duration := time.Since(start).Seconds()      // 计算本次请求耗时
+			totalRequests := cache.CacheRequests.Value() // 获取总请求次数
+			if totalRequests > 0 {                       // 避免除以零
+				// 更新平均延迟：(旧平均值 * (n-1) + 新值) / n
+				setLatency.Set((setLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
+			}
+		}()
 
 		apiKey := r.URL.Query().Get("api_key")
 		if apiKey != validAPIKey {
@@ -381,9 +411,26 @@ func main() {
 	// 新增：启动心跳检测
 	hb := cache.NewHeartbeat(ring, localAddr, validAPIKey, infoLogger, errorLogger, localCache)
 	hb.Start()
+	// 配置 TLS 并启用会话缓存
+	server := &http.Server{
+		Addr: ":" + *port,
+		TLSConfig: &tls.Config{
+			InsecureSkipVerify: true,
+			ClientSessionCache: tls.NewLRUClientSessionCache(5000), // 增加容量
+			SessionTicketsDisabled: false,
+			MinVersion: tls.VersionTLS13, // 强制 TLS 1.3（更快）
+			PreferServerCipherSuites: true,
+			CurvePreferences: []tls.CurveID{tls.X25519}, // 只用最快曲线
+		},
+		ReadTimeout:  70 * time.Second,
+		WriteTimeout: 70 * time.Second,
+		IdleTimeout:  90 * time.Second,
+	}
+
 
 	fmt.Printf("Server running on https://localhost:%s\n", *port)
-	err = http.ListenAndServeTLS(":"+*port, "cert.pem", "key.pem", nil)
+	server.Handler = gzipHandler(http.DefaultServeMux) // 添加 gzip 中间件
+	err = server.ListenAndServeTLS("cert.pem", "key.pem")
 	if err != nil {
 		log.Fatalf("Failed to start TLS server: %v", err)
 	}
