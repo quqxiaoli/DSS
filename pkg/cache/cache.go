@@ -2,16 +2,16 @@ package cache
 
 import (
 	"container/list"
+	"expvar" //暴露指标
 	"sync"
 	"time"
-	"expvar"  //暴露指标
 )
 
 // 定义全局监控指标
 var (
-    CacheHits     = expvar.NewInt("cache_hits")     // 缓存命中次数
-    CacheMisses   = expvar.NewInt("cache_misses")   // 缓存未命中次数
-    CacheRequests = expvar.NewInt("cache_requests") // 总请求次数
+	CacheHits     = expvar.NewInt("cache_hits")     // 缓存命中次数
+	CacheMisses   = expvar.NewInt("cache_misses")   // 缓存未命中次数
+	CacheRequests = expvar.NewInt("cache_requests") // 总请求次数
 )
 
 type CacheItem struct {
@@ -86,13 +86,19 @@ func (c *Cache) startCleanup(interval time.Duration) {
 	for range ticker.C {
 		c.mu.Lock()
 		now := time.Now()
-		// 从尾部向前检查，过期就删除
-		for elem := c.list.Back(); elem != nil; elem = elem.Prev() {
+		// 优化：只检查后10%的元素，减少锁持有时间
+		maxCheck := c.list.Len() / 10
+		if maxCheck == 0 {
+			maxCheck = 1
+		}
+		checked := 0
+		for elem := c.list.Back(); elem != nil && checked < maxCheck; elem = elem.Prev() {
 			item := elem.Value.(*CacheItem)
 			if now.After(item.ExpiresAt) {
 				c.list.Remove(elem)
 				delete(c.data, item.Key)
 			}
+			checked++
 		}
 		c.mu.Unlock()
 	}
@@ -114,26 +120,26 @@ func (c *Cache) GetAll() map[string]string {
 }
 
 func (c *Cache) Get(key string) (string, bool) {
-    c.mu.Lock()
-    defer c.mu.Unlock()
+	c.mu.Lock()
+	defer c.mu.Unlock()
 
-    CacheRequests.Add(1) // 每次 Get 请求计数加 1
+	CacheRequests.Add(1) // 每次 Get 请求计数加 1
 
-    elem, exists := c.data[key]
-    if !exists {
-        CacheMisses.Add(1) // 键不存在，记录未命中
-        return "", false
-    }
+	elem, exists := c.data[key]
+	if !exists {
+		CacheMisses.Add(1) // 键不存在，记录未命中
+		return "", false
+	}
 
-    item := elem.Value.(*CacheItem)
-    if time.Now().After(item.ExpiresAt) {
-        c.list.Remove(elem)
-        delete(c.data, key)
-        CacheMisses.Add(1) // 键已过期，记录未命中
-        return "", false
-    }
+	item := elem.Value.(*CacheItem)
+	if time.Now().After(item.ExpiresAt) {
+		c.list.Remove(elem)
+		delete(c.data, key)
+		CacheMisses.Add(1) // 键已过期，记录未命中
+		return "", false
+	}
 
-    c.list.MoveToFront(elem)
-    CacheHits.Add(1) // 键有效，记录命中
-    return item.Value, true
+	c.list.MoveToFront(elem)
+	CacheHits.Add(1) // 键有效，记录命中
+	return item.Value, true
 }
