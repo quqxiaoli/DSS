@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes" //处理POST请求的字节缓冲区
+	"compress/gzip"
 	"crypto/tls"
 	"encoding/json"    //处理JSON数据
 	"expvar"           //暴露指标
@@ -14,31 +15,31 @@ import (
 	"os"               //文件操作
 	"strings"          //检查字符串前缀
 	"time"             //时间处理
-    "compress/gzip"
+
 	"github.com/quqxiaoli/distributed-cache/pkg/cache"
 )
 
 func gzipHandler(h http.Handler) http.Handler {
-    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-        if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
-            h.ServeHTTP(w, r)
-            return
-        }
-        w.Header().Set("Content-Encoding", "gzip")
-        gz := gzip.NewWriter(w)
-        defer gz.Close()
-        gzw := gzipResponseWriter{Writer: gz, ResponseWriter: w}
-        h.ServeHTTP(gzw, r)
-    })
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
+			h.ServeHTTP(w, r)
+			return
+		}
+		w.Header().Set("Content-Encoding", "gzip")
+		gz := gzip.NewWriter(w)
+		defer gz.Close()
+		gzw := gzipResponseWriter{Writer: gz, ResponseWriter: w}
+		h.ServeHTTP(gzw, r)
+	})
 }
 
 type gzipResponseWriter struct {
-    io.Writer
-    http.ResponseWriter
+	io.Writer
+	http.ResponseWriter
 }
 
 func (w gzipResponseWriter) Write(b []byte) (int, error) {
-    return w.Writer.Write(b)
+	return w.Writer.Write(b)
 }
 
 // 定义请求延迟指标
@@ -135,27 +136,36 @@ func forwardRequest(method, url, apiKey, key, value string) (*Response, error) {
 	}
 	infoLogger.Printf("Forward request to %s succeeded in %v", url, duration) // 新增：记录成功信息
 
-	// 处理响应
-	defer resp.Body.Close()            // 延迟关闭响应体
-	body, err := io.ReadAll(resp.Body) // 读取响应体内容
-	if err != nil {                    // 检查读取是否出错
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
 		errorLogger.Printf("Failed to read response body from %s: %v", url, err)
 		return nil, err
 	}
 
-	// 解析响应
-	var response Response                 // 存储反序列化结果
-	err = json.Unmarshal(body, &response) // 将响应体反序列化为 Response 结构体
-	if err != nil {                       // 检查解析是否出错
+	// 批量操作返回数组，单操作返回单个 Response
+	if strings.Contains(url, "/batch") {
+		var responses []Response
+		err = json.Unmarshal(body, &responses)
+		if err != nil {
+			errorLogger.Printf("Failed to unmarshal batch response from %s: %v", url, err)
+			return nil, err
+		}
+		return &responses[0], nil // 简化返回，实际应处理整个数组
+	}
+
+	var response Response
+	err = json.Unmarshal(body, &response)
+	if err != nil {
 		errorLogger.Printf("Failed to unmarshal response from %s: %v", url, err)
 		return nil, err
 	}
-
-	return &response, err // 返回响应和可能的错误
+	return &response, nil
 }
 
 func main() {
-	
+
 	//解析命令行参数
 	port := flag.String("port", "8080", "server port") //参数：服务器端口，默认8080
 	flag.Parse()                                       //解析命令行输入
@@ -408,25 +418,183 @@ func main() {
 		}
 	})
 
+	http.HandleFunc("/batch_get", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		defer func() {
+			duration := time.Since(start).Seconds()
+			totalRequests := cache.CacheRequests.Value()
+			if totalRequests > 0 {
+				getLatency.Set((getLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
+			}
+		}()
+
+		apiKey := r.URL.Query().Get("api_key")
+		if apiKey != validAPIKey {
+			errorLogger.Printf("Invalid API key: %s", apiKey)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusUnauthorized)
+			json.NewEncoder(w).Encode(Response{Error: "Invalid API key"})
+			return
+		}
+
+		keysParam := r.URL.Query().Get("keys")
+		if keysParam == "" {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(Response{Error: "Keys cannot be empty"})
+			return
+		}
+
+		keys := strings.Split(keysParam, ",")
+		w.Header().Set("Content-Type", "application/json")
+
+		// 本地处理所有键
+		if ring.GetNode(keys[0]) == localAddr { // 假设所有键在同一节点
+			results := make([]Response, len(keys))
+			for i, key := range keys {
+				resultCh := make(chan struct {
+					value  string
+					exists bool
+				})
+				getCh <- GetRequest{key, resultCh}
+				result := <-resultCh
+				if result.exists {
+					results[i] = Response{Status: "ok", Key: key, Value: result.value}
+				} else {
+					results[i] = Response{Status: "not found", Key: key}
+				}
+			}
+			infoLogger.Printf("Batch get request: keys=%v, target node=%s", keys, localAddr)
+			json.NewEncoder(w).Encode(results)
+		} else {
+			// 转发到目标节点
+			node := ring.GetNode(keys[0]) // 简化：假设所有键在同一节点
+			infoLogger.Printf("Batch get request forwarded: keys=%v, target node=%s", keys, node)
+			url := fmt.Sprintf("%s/batch_get?api_key=%s&keys=%s", node, apiKey, keysParam)
+			resp, err := globalClient.Get(url)
+			if err != nil {
+				errorLogger.Printf("Failed to forward batch get to %s: %v", node, err)
+				w.WriteHeader(http.StatusInternalServerError)
+				json.NewEncoder(w).Encode(Response{Error: "Failed to fetch from target node"})
+				return
+			}
+			defer resp.Body.Close()
+			body, _ := io.ReadAll(resp.Body)
+			w.Write(body) // 直接透传响应
+		}
+	})
+
+	http.HandleFunc("/batch_set", func(w http.ResponseWriter, r *http.Request) {
+		start := time.Now()
+		defer func() {
+			duration := time.Since(start).Seconds()
+			totalRequests := cache.CacheRequests.Value()
+			if totalRequests > 0 {
+				setLatency.Set((setLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
+			}
+		}()
+
+		apiKey := r.URL.Query().Get("api_key")
+		if apiKey != validAPIKey {
+			errorLogger.Printf("Invalid API key: %s", apiKey)
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusUnauthorized)
+			json.NewEncoder(w).Encode(Response{Error: "Invalid API key"})
+			return
+		}
+
+		if r.Method != http.MethodPost {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusMethodNotAllowed)
+			json.NewEncoder(w).Encode(Response{Error: "Method not allowed"})
+			return
+		}
+
+		var pairs []struct {
+			Key   string `json:"key"`
+			Value string `json:"value"`
+		}
+		if err := json.NewDecoder(r.Body).Decode(&pairs); err != nil {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(Response{Error: "Invalid request body"})
+			return
+		}
+
+		if len(pairs) == 0 {
+			w.Header().Set("Content-Type", "application/json")
+			w.WriteHeader(http.StatusBadRequest)
+			json.NewEncoder(w).Encode(Response{Error: "Pairs cannot be empty"})
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/json")
+		node := ring.GetNode(pairs[0].Key) // 简化：假设所有键在同一节点
+
+		if node == localAddr {
+			results := make([]Response, len(pairs))
+			for i, pair := range pairs {
+				if pair.Key == "" || pair.Value == "" {
+					results[i] = Response{Error: "Key or value cannot be empty"}
+				} else {
+					localCache.Set(pair.Key, pair.Value)
+					results[i] = Response{Status: "ok", Key: pair.Key}
+				}
+			}
+			infoLogger.Printf("Batch set request: pairs=%v, target node=%s", pairs, localAddr)
+			go func() {
+				jsonBody, err := json.Marshal(pairs) // 序列化 pairs
+				if err != nil {
+					errorLogger.Printf("Failed to marshal pairs for sync: %v", err)
+					return
+				}
+				for _, n := range nodes {
+					if n != localAddr {
+						_, err := forwardRequest(http.MethodPost, n+"/batch_set", apiKey, "", string(jsonBody))
+						if err != nil {
+							errorLogger.Printf("Failed to sync batch set to %s: %v", n, err)
+						}
+					}
+				}
+			}()
+			json.NewEncoder(w).Encode(results)
+		} else {
+			jsonBody, err := json.Marshal(pairs) // 检查错误
+			if err != nil {
+				errorLogger.Printf("Failed to marshal pairs: %v", err)
+				w.WriteHeader(http.StatusInternalServerError)
+				json.NewEncoder(w).Encode(Response{Error: "Failed to serialize request"})
+				return
+			}
+			resp, err := forwardRequest(http.MethodPost, node+"/batch_set", apiKey, "", string(jsonBody))
+			if err != nil {
+				errorLogger.Printf("Failed to forward batch set to %s: %v", node, err)
+				w.WriteHeader(http.StatusInternalServerError)
+				json.NewEncoder(w).Encode(Response{Error: "Failed to forward request"})
+				return
+			}
+			json.NewEncoder(w).Encode(resp)
+		}
+	})
+
 	// 新增：启动心跳检测
 	hb := cache.NewHeartbeat(ring, localAddr, validAPIKey, infoLogger, errorLogger, localCache)
 	hb.Start()
 	// 配置 TLS 并启用会话缓存
 	server := &http.Server{
 		Addr: ":" + *port,
-        TLSConfig: &tls.Config{
-        InsecureSkipVerify: true,           // 调试用，跳过证书验证
-        ClientSessionCache: tls.NewLRUClientSessionCache(5000), // TLS 会话缓存
-        SessionTicketsDisabled: false,      // 启用会话票据
-        MinVersion: tls.VersionTLS12,       // 修改为 TLS 1.2
-        PreferServerCipherSuites: true,     // 服务器优先选择加密套件
-        CurvePreferences: []tls.CurveID{tls.X25519, tls.CurveP256}, // 支持多种曲线
+		TLSConfig: &tls.Config{
+			InsecureSkipVerify:       true,                                     // 调试用，跳过证书验证
+			ClientSessionCache:       tls.NewLRUClientSessionCache(5000),       // TLS 会话缓存
+			SessionTicketsDisabled:   false,                                    // 启用会话票据
+			MinVersion:               tls.VersionTLS12,                         // 修改为 TLS 1.2
+			PreferServerCipherSuites: true,                                     // 服务器优先选择加密套件
+			CurvePreferences:         []tls.CurveID{tls.X25519, tls.CurveP256}, // 支持多种曲线
 		},
 		ReadTimeout:  70 * time.Second,
 		WriteTimeout: 70 * time.Second,
 		IdleTimeout:  90 * time.Second,
 	}
-
 
 	fmt.Printf("Server running on https://localhost:%s\n", *port)
 	server.Handler = gzipHandler(http.DefaultServeMux) // 添加 gzip 中间件
