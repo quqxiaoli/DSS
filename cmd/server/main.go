@@ -33,19 +33,13 @@ func main() {
     logger.Info("Starting distributed cache server on port %s", *port)
 
     localCache := cache.NewCache(100)
-    getCh := make(chan struct {
-        key    string
-        result chan struct {
-            value  string
-            exists bool
-        }
-    }, 10)
+    getCh := make(chan api.GetRequest, 10)
     go func() {
         for req := range getCh {
-            value, exists := localCache.Get(req.key)
-            req.result <- struct {
-                value  string
-                exists bool
+            value, exists := localCache.Get(req.Key)
+            req.Result <- struct {
+                Value  string
+                Exists bool
             }{value, exists}
         }
     }()

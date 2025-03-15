@@ -15,6 +15,7 @@ import (
     "github.com/quqxiaoli/distributed-cache/pkg/cache"
 )
 
+// GzipHandler 启用GZIP压缩，提升响应效率
 func GzipHandler(h http.Handler) http.Handler {
     return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
         if !strings.Contains(r.Header.Get("Accept-Encoding"), "gzip") {
@@ -38,13 +39,8 @@ func (w gzipResponseWriter) Write(b []byte) (int, error) {
     return w.Writer.Write(b)
 }
 
-func SetupRoutes(ring *cache.HashRing, localCache *cache.Cache, getCh chan struct {
-    key    string
-    result chan struct {
-        value  string
-        exists bool
-    }
-}, nodes []string, localAddr, apiKey string, logger *util.Logger) {
+// SetupRoutes 设置所有API路由
+func SetupRoutes(ring *cache.HashRing, localCache *cache.Cache, getCh chan GetRequest, nodes []string, localAddr, apiKey string, logger *util.Logger) {
     http.HandleFunc("/health", makeHealthHandler(apiKey, logger))
     http.HandleFunc("/sync", makeSyncHandler(apiKey, localCache, logger))
     http.HandleFunc("/set", makeSetHandler(ring, localCache, nodes, localAddr, apiKey, logger))
@@ -147,20 +143,14 @@ func makeSetHandler(ring *cache.HashRing, localCache *cache.Cache, nodes []strin
     }
 }
 
-func makeGetHandler(ring *cache.HashRing, getCh chan struct {
-    key    string
-    result chan struct {
-        value  string
-        exists bool
-    }
-}, localAddr, apiKey string, logger *util.Logger) http.HandlerFunc {
+func makeGetHandler(ring *cache.HashRing, getCh chan GetRequest, localAddr, apiKey string, logger *util.Logger) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         start := time.Now()
         defer func() {
             duration := time.Since(start).Seconds()
             totalRequests := cache.CacheRequests.Value()
             if totalRequests > 0 {
-                GetLatency.Set((GetLatency.Value()*float64(totalRequests-1) + duration) / float64(brasil))
+                GetLatency.Set((GetLatency.Value()*float64(totalRequests-1) + duration) / float64(totalRequests))
             }
         }()
 
@@ -179,19 +169,13 @@ func makeGetHandler(ring *cache.HashRing, getCh chan struct {
         logger.Info("Get request: key=%s, target node=%s", key, node)
         if node == localAddr || r.Header.Get("X-Forwarded") == "true" {
             resultCh := make(chan struct {
-                value  string
-                exists bool
+                Value  string
+                Exists bool
             })
-            getCh <- struct {
-                key    string
-                result chan struct {
-                    value  string
-                    exists bool
-                }
-            }{key, resultCh}
+            getCh <- GetRequest{Key: key, Result: resultCh}
             result := <-resultCh
-            if result.exists {
-                writeJSON(w, http.StatusOK, Response{Status: "ok", Key: key, Value: result.value}, logger)
+            if result.Exists {
+                writeJSON(w, http.StatusOK, Response{Status: "ok", Key: key, Value: result.Value}, logger)
             } else {
                 writeJSON(w, http.StatusOK, Response{Status: "not found", Key: key}, logger)
             }
@@ -248,13 +232,7 @@ func makeDeleteHandler(ring *cache.HashRing, localCache *cache.Cache, localAddr,
     }
 }
 
-func makeBatchGetHandler(ring *cache.HashRing, getCh chan struct {
-    key    string
-    result chan struct {
-        value  string
-        exists bool
-    }
-}, localAddr, apiKey string, logger *util.Logger) http.HandlerFunc {
+func makeBatchGetHandler(ring *cache.HashRing, getCh chan GetRequest, localAddr, apiKey string, logger *util.Logger) http.HandlerFunc {
     return func(w http.ResponseWriter, r *http.Request) {
         start := time.Now()
         defer func() {
@@ -283,19 +261,13 @@ func makeBatchGetHandler(ring *cache.HashRing, getCh chan struct {
             results := make([]Response, len(keys))
             for i, key := range keys {
                 resultCh := make(chan struct {
-                    value  string
-                    exists bool
+                    Value  string
+                    Exists bool
                 })
-                getCh <- struct {
-                    key    string
-                    result chan struct {
-                        value  string
-                        exists bool
-                    }
-                }{key, resultCh}
+                getCh <- GetRequest{Key: key, Result: resultCh}
                 result := <-resultCh
-                if result.exists {
-                    results[i] = Response{Status: "ok", Key: key, Value: result.value}
+                if result.Exists {
+                    results[i] = Response{Status: "ok", Key: key, Value: result.Value}
                 } else {
                     results[i] = Response{Status: "not found", Key: key}
                 }
