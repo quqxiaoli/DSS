@@ -1,0 +1,14 @@
+# 编译产物
+/cache-server
+*.exe
+
+# 日志文件
+logs/
+
+# 证书文件
+config/cert.pem
+config/key.pem
+
+# Go临时文件
+*.test
+*.prof
