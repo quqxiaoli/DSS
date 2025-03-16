@@ -28,20 +28,20 @@ func NewLogger(path string) (*Logger, error) {
 		return nil, fmt.Errorf("failed to open log file %s: %v", path, err)
 	}
 
-	// 从日志文件路径中提取端口号信息，假设路径格式为包含 "_" 和 ".log" 的字符串，通过分割和去除后缀获取端口号。
-	port := strings.Split(path, "_")[1]
-	port = strings.TrimSuffix(port, ".log")
-	// 创建一个新的 Logger 结构体实例，初始化 infoLogger 和 errorLogger，并将打开的文件赋值给 file 字段。
-	l := &Logger{
-		// 创建一个信息日志记录器，设置日志前缀为 [INFO localhost:端口号]，并包含标准的日期和时间标志。
-		infoLogger: log.New(file, fmt.Sprintf("[INFO localhost:%s] ", port), log.LstdFlags),
-		// 创建一个错误日志记录器，设置日志前缀为 [ERROR localhost:端口号]，并包含标准的日期和时间标志。
-		errorLogger: log.New(file, fmt.Sprintf("[ERROR localhost:%s] ", port), log.LstdFlags),
-		// 将打开的日志文件赋值给 Logger 结构体的 file 字段。
-		file: file,
-	}
-	// 返回创建好的日志记录器实例和 nil 错误，表示创建成功。
-	return l, nil
+	// 默认端口号
+    port := "unknown"
+    parts := strings.Split(path, "_")
+    if len(parts) > 1 { // 如果有 "_"，取第 2 个元素
+        port = parts[1]
+    }
+    port = strings.TrimSuffix(port, ".log")
+
+    l := &Logger{
+        infoLogger:  log.New(file, fmt.Sprintf("[INFO localhost:%s] ", port), log.LstdFlags),
+        errorLogger: log.New(file, fmt.Sprintf("[ERROR localhost:%s] ", port), log.LstdFlags),
+        file:        file,
+    }
+    return l, nil
 }
 
 func (l *Logger) Info(format string, v ...interface{}) {

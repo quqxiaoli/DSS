@@ -1,0 +1,18 @@
+[INFO localhost:unknown] 2025/03/16 22:32:16 Set request: key=test, node=, localAddr=127.0.0.1:8080, X-Forwarded=
+[INFO localhost:unknown] 2025/03/16 22:32:16 Forwarding request to: https:///set (attempt 1/3)
+[ERROR localhost:unknown] 2025/03/16 22:32:16 Forward request to https:///set failed after 28.592µs: Post "https:///set?api_key=my-secret-key": http: no Host in request URL
+[INFO localhost:unknown] 2025/03/16 22:32:16 Forwarding request to: https:///set (attempt 2/3)
+[ERROR localhost:unknown] 2025/03/16 22:32:16 Forward request to https:///set failed after 17.597µs: Post "https:///set?api_key=my-secret-key": http: no Host in request URL
+[INFO localhost:unknown] 2025/03/16 22:32:17 Forwarding request to: https:///set (attempt 3/3)
+[ERROR localhost:unknown] 2025/03/16 22:32:17 Forward request to https:///set failed after 17.032µs: Post "https:///set?api_key=my-secret-key": http: no Host in request URL
+[ERROR localhost:unknown] 2025/03/16 22:32:17 Failed to forward set request to : failed to forward request to https:///set after 3 retries
+[INFO localhost:unknown] 2025/03/16 22:32:17 Get request: key=test, target node=
+[INFO localhost:unknown] 2025/03/16 22:32:17 Forwarding request to: https:///get (attempt 1/3)
+[ERROR localhost:unknown] 2025/03/16 22:32:17 Forward request to https:///get failed after 60.433µs: Get "https:///get?key=test&api_key=my-secret-key": http: no Host in request URL
+[INFO localhost:unknown] 2025/03/16 22:32:18 Forwarding request to: https:///get (attempt 2/3)
+[ERROR localhost:unknown] 2025/03/16 22:32:18 Forward request to https:///get failed after 18.915µs: Get "https:///get?key=test&api_key=my-secret-key": http: no Host in request URL
+[INFO localhost:unknown] 2025/03/16 22:32:19 Forwarding request to: https:///get (attempt 3/3)
+[ERROR localhost:unknown] 2025/03/16 22:32:19 Forward request to https:///get failed after 20.966µs: Get "https:///get?key=test&api_key=my-secret-key": http: no Host in request URL
+[ERROR localhost:unknown] 2025/03/16 22:32:19 Failed to forward get request to : failed to forward request to https:///get after 3 retries
+[INFO localhost:unknown] 2025/03/16 22:34:08 Set request: key=test, node=127.0.0.1:8080, localAddr=127.0.0.1:8080, X-Forwarded=
+[INFO localhost:unknown] 2025/03/16 22:34:08 Get request: key=test, target node=127.0.0.1:8080
