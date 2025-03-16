@@ -1,0 +1,257 @@
+[INFO localhost:8082] 2025/03/16 16:54:32 Starting distributed cache server on port 8082
+[INFO localhost:8082] 2025/03/16 16:54:32 Waiting for nodes to initialize...
+[INFO localhost:8082] 2025/03/16 16:54:40 Sync received: key=key3, value=val3
+[INFO localhost:8082] 2025/03/16 16:54:40 Sync received: key=, value=[{"key":"key1","value":"val1"},{"key":"key2","value":"val2"}]
+[INFO localhost:8082] 2025/03/16 16:54:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:54:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:54:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:54:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:54:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:54:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:55:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:55:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:55:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:55:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:55:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:55:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:55:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:55:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:55:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:55:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:55:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:55:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:56:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:56:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:56:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:56:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:56:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:56:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:56:43 Sync received: key=key3, value=val3
+[INFO localhost:8082] 2025/03/16 16:56:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:56:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:56:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:56:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:56:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:56:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:57:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:57:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:57:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:57:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:57:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:57:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:57:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:57:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:57:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:57:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:57:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:57:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:58:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:58:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:58:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:58:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:58:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:58:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:58:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:58:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:58:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:58:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:58:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:58:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:59:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:59:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:59:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:59:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:59:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:59:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 16:59:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:59:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 16:59:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:59:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 16:59:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 16:59:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:00:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:00:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:00:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:00:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:00:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:00:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:00:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:00:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:00:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:00:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:00:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:00:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:01:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:01:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:01:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:01:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:01:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:01:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:01:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:01:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:01:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:01:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:01:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:01:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:02:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:02:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:02:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:02:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:02:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:02:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:02:47 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:02:47 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:02:47 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:02:47 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:02:47 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:02:47 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:03:17 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:03:17 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:03:17 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:03:17 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:03:17 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:03:17 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:08:18 Starting distributed cache server on port 8082
+[INFO localhost:8082] 2025/03/16 17:08:18 Waiting for nodes to initialize...
+[INFO localhost:8082] 2025/03/16 17:08:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:08:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:08:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:08:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:08:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:08:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:09:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:09:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:09:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:09:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:09:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:09:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:09:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:09:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:09:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:09:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:09:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:09:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:10:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:10:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:10:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:10:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:10:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:10:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:10:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:10:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:10:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:10:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:10:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:10:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:11:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:11:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:11:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:11:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:11:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:11:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:11:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:11:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:11:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:11:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:11:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:11:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:12:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:12:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:12:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:12:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:12:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:12:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:12:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:12:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:12:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:12:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:12:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:12:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:13:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:13:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:13:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:13:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:13:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:13:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:13:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:13:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:13:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:13:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:13:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:13:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:14:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:14:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:14:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:14:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:14:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:14:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:14:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:14:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:14:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:14:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:14:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:14:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:14:40 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:41 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:42 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:43 Get request: key=test2, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:53 Get request: key=test1, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:53 Get request: key=test1, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:53 Get request: key=test1, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:53 Get request: key=test1, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:14:53 Get request: key=test1, target node=127.0.0.1:8082
+[INFO localhost:8082] 2025/03/16 17:15:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:15:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:15:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:15:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:15:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:15:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:15:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:15:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:15:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:15:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:15:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:15:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:16:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:16:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:16:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:16:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:16:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:16:03 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:16:33 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:16:33 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:16:33 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:16:33 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:16:33 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:16:33 Node 127.0.0.1:8080 is healthy
+[INFO localhost:8082] 2025/03/16 17:17:03 Health check to 127.0.0.1:8081 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:17:03 Health check to 127.0.0.1:8080 returned status code: 200
+[INFO localhost:8082] 2025/03/16 17:17:03 Health check to 127.0.0.1:8081 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:17:03 Node 127.0.0.1:8081 is healthy
+[INFO localhost:8082] 2025/03/16 17:17:03 Health check to 127.0.0.1:8080 returned status: ok
+[INFO localhost:8082] 2025/03/16 17:17:03 Node 127.0.0.1:8080 is healthy
