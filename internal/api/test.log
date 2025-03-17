@@ -16,3 +16,60 @@
 [ERROR localhost:unknown] 2025/03/16 22:32:19 Failed to forward get request to : failed to forward request to https:///get after 3 retries
 [INFO localhost:unknown] 2025/03/16 22:34:08 Set request: key=test, node=127.0.0.1:8080, localAddr=127.0.0.1:8080, X-Forwarded=
 [INFO localhost:unknown] 2025/03/16 22:34:08 Get request: key=test, target node=127.0.0.1:8080
+[ERROR localhost:unknown] 2025/03/16 23:04:22 Invalid API key for health check: wrong-key
+[ERROR localhost:unknown] 2025/03/16 23:05:05 Invalid API key for health check: wrong-key
+[INFO localhost:unknown] 2025/03/16 23:07:14 Delete request: key=test, node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/16 23:08:40 Batch get request: keys=[key1 key2], target node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/16 23:18:19 Set request: key=test, node=127.0.0.1:8080, localAddr=127.0.0.1:8080, X-Forwarded=
+[INFO localhost:unknown] 2025/03/16 23:18:19 Get request: key=test, target node=127.0.0.1:8080
+[ERROR localhost:unknown] 2025/03/16 23:18:19 Invalid API key for health check: wrong-key
+[INFO localhost:unknown] 2025/03/16 23:18:19 Delete request: key=test, node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/16 23:18:19 Batch get request: keys=[key1 key2], target node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/16 23:18:19 Key key1 assigned to node 127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/16 23:18:19 Key key2 assigned to node 127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/16 23:18:19 Processing batch for node 127.0.0.1:8080: [{key1 value1} {key2 value2}]
+[INFO localhost:unknown] 2025/03/16 23:18:19 Batch set local: pairs=[{key1 value1} {key2 value2}]
+[INFO localhost:unknown] 2025/03/16 23:18:19 Batch set completed with results: [{ok key1  } {ok key2  }]
+[INFO localhost:unknown] 2025/03/16 23:18:19 Sync received: key=sync-test, value=sync-value
+[INFO localhost:unknown] 2025/03/16 23:20:02 Sync received: key=sync-test, value=sync-value
+[INFO localhost:unknown] 2025/03/17 10:29:58 Sync received: key=sync-test, value=sync-value
+[ERROR localhost:unknown] 2025/03/17 10:29:58 Invalid API key: wrong-key
+[INFO localhost:unknown] 2025/03/17 10:29:58 Sync received: key=, value=sync-value
+[INFO localhost:unknown] 2025/03/17 10:56:17 Sync received: key=sync-test, value=sync-value
+[INFO localhost:unknown] 2025/03/17 10:56:17 Sync received: key=batch-key1, value=batch-value1
+[INFO localhost:unknown] 2025/03/17 10:56:17 Sync received: key=batch-key2, value=batch-value2
+[ERROR localhost:unknown] 2025/03/17 10:56:17 Invalid API key: wrong-key
+[INFO localhost:unknown] 2025/03/17 10:56:17 Sync received: key=batch-key1, value=batch-value1
+[INFO localhost:unknown] 2025/03/17 14:37:50 Set request: key=test, node=127.0.0.1:8080, localAddr=127.0.0.1:8080, X-Forwarded=
+[INFO localhost:unknown] 2025/03/17 14:37:50 Get request: key=test, target node=127.0.0.1:8080
+[ERROR localhost:unknown] 2025/03/17 14:37:50 Invalid API key for health check: wrong-key
+[INFO localhost:unknown] 2025/03/17 14:37:50 Chaos testing enabled with failure rate 1.00
+[INFO localhost:unknown] 2025/03/17 14:37:50 Delete request: key=test, node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:37:50 Batch get request: keys=[key1 key2], target node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:37:50 Key key1 assigned to node 127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:37:50 Key key2 assigned to node 127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:37:50 Processing batch for node 127.0.0.1:8080: [{key1 value1} {key2 value2}]
+[INFO localhost:unknown] 2025/03/17 14:37:50 Batch set local: pairs=[{key1 value1} {key2 value2}]
+[INFO localhost:unknown] 2025/03/17 14:37:50 Batch set completed with results: [{ok key1  } {ok key2  }]
+[INFO localhost:unknown] 2025/03/17 14:37:50 Sync received: key=sync-test, value=sync-value
+[INFO localhost:unknown] 2025/03/17 14:37:50 Sync received: key=batch-key1, value=batch-value1
+[INFO localhost:unknown] 2025/03/17 14:37:50 Sync received: key=batch-key2, value=batch-value2
+[ERROR localhost:unknown] 2025/03/17 14:37:50 Invalid API key: wrong-key
+[INFO localhost:unknown] 2025/03/17 14:37:50 Sync received: key=batch-key1, value=batch-value1
+[INFO localhost:unknown] 2025/03/17 14:47:34 Set request: key=test, node=127.0.0.1:8080, localAddr=127.0.0.1:8080, X-Forwarded=
+[INFO localhost:unknown] 2025/03/17 14:47:34 Get request: key=test, target node=127.0.0.1:8080
+[ERROR localhost:unknown] 2025/03/17 14:47:34 Invalid API key for health check: wrong-key
+[INFO localhost:unknown] 2025/03/17 14:47:34 Chaos testing enabled with failure rate 1.00
+[ERROR localhost:unknown] 2025/03/17 14:47:34 Local node 127.0.0.1:8080 is unhealthy
+[INFO localhost:unknown] 2025/03/17 14:47:34 Delete request: key=test, node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:47:34 Batch get request: keys=[key1 key2], target node=127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:47:34 Key key1 assigned to node 127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:47:34 Key key2 assigned to node 127.0.0.1:8080
+[INFO localhost:unknown] 2025/03/17 14:47:34 Processing batch for node 127.0.0.1:8080: [{key1 value1} {key2 value2}]
+[INFO localhost:unknown] 2025/03/17 14:47:34 Batch set local: pairs=[{key1 value1} {key2 value2}]
+[INFO localhost:unknown] 2025/03/17 14:47:34 Batch set completed with results: [{ok key1  } {ok key2  }]
+[INFO localhost:unknown] 2025/03/17 14:47:34 Sync received: key=sync-test, value=sync-value
+[INFO localhost:unknown] 2025/03/17 14:47:34 Sync received: key=batch-key1, value=batch-value1
+[INFO localhost:unknown] 2025/03/17 14:47:34 Sync received: key=batch-key2, value=batch-value2
+[ERROR localhost:unknown] 2025/03/17 14:47:34 Invalid API key: wrong-key
+[INFO localhost:unknown] 2025/03/17 14:47:34 Sync received: key=batch-key1, value=batch-value1

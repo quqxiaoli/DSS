@@ -8,10 +8,16 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
+type ChaosConfig struct {
+    Enabled     bool    `yaml:"enabled"`
+    FailureRate float32 `yaml:"failure_rate"`
+}
+
 type Config struct {
 	Server  ServerConfig `yaml:"server"`
 	Nodes   []string     `yaml:"nodes"`
 	Logging string       `yaml:"logging"`
+	Chaos   ChaosConfig  `yaml:"chaos"`
 }
 
 type ServerConfig struct {

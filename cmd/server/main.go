@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math/rand"
 	"net/http"
 	"os"
 	"time"
@@ -16,6 +17,7 @@ import (
 )
 
 func main() {
+	rand.Seed(time.Now().UnixNano()) // 添加随机种子
 	// 定义一个命令行参数 "port"，默认值为 "8080"，用于指定服务器端口。
 	port := flag.String("port", "8080", "server port")
 	// 解析命令行参数。
@@ -71,6 +73,11 @@ func main() {
 	hb := cache.NewHeartbeat(ring, localAddr, cfg.Server.APIKey, logger.InfoLogger(), logger.ErrorLogger(), localCache)
 	// 启动一个 goroutine 来启动心跳机制。
 	go hb.Start()
+
+	// 启用混沌测试
+    if cfg.Chaos.Enabled {
+        hb.EnableChaos(cfg.Chaos.FailureRate)
+    }
 
 	// 设置 HTTP 路由，处理各种请求。
 	api.SetupRoutes(ring, localCache, getCh, cfg.Nodes, localAddr, cfg.Server.APIKey, logger, hb)

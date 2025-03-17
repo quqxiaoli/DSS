@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"math/rand/v2"
 	"net/http"
 	"strings"
 	"sync"
@@ -21,6 +22,8 @@ type Heartbeat struct {
 	failures    map[string]int // 节点失败计数
 	client      *http.Client   // HTTP客户端，与main.go同步
 	cache       *Cache         // 本地缓存实例
+	chaosEnabled bool    // 新增：是否启用混沌测试
+    failureRate  float32 // 新增：故障概率（0.0-1.0）
 }
 
 // IsNodeHealthy 公开方法，检查节点是否健康
@@ -51,6 +54,8 @@ func NewHeartbeat(ring *HashRing, localAddr, apiKey string, infoLogger, errorLog
 			},
 		},
 		cache: cache,
+		chaosEnabled: false, // 默认关闭
+        failureRate:  0.3,   // 默认 30% 故障率
 	}
 }
 
@@ -58,6 +63,7 @@ func NewHeartbeat(ring *HashRing, localAddr, apiKey string, infoLogger, errorLog
 func (h *Heartbeat) Start() {
 	h.infoLogger.Printf("Waiting for nodes to initialize...")
 	time.Sleep(15 * time.Second) // 初始延迟15秒，给节点启动时间
+	stopCh := make(chan struct{}) // 添加停止通道
 
 	go func() {
 		for {
@@ -65,6 +71,19 @@ func (h *Heartbeat) Start() {
 			sem := make(chan struct{}, 2) // 限制并发检查为2，避免请求洪水
 			var wg sync.WaitGroup
 
+			// 混沌测试：模拟本地节点故障
+            if h.chaosEnabled && rand.Float32() < h.failureRate {
+                h.errorLogger.Printf("Chaos: Simulating local node %s failure", h.localAddr)
+                h.failures[h.localAddr] = 3 // 直接标记为不健康
+				// 移除本地节点并迁移数据
+                h.errorLogger.Printf("Node %s confirmed unhealthy, removing from ring", h.localAddr)
+                h.ring.RemoveNode(h.localAddr)
+                h.migrateData(h.localAddr)
+				close(stopCh) // 停止心跳
+            } else {
+                h.failures[h.localAddr] = 0 // 本地节点健康
+            }
+			
 			for _, node := range nodes {
 				if node != h.localAddr { // 跳过本地节点
 					wg.Add(1)
@@ -110,27 +129,24 @@ func (h *Heartbeat) Start() {
 // migrateData 从失败节点迁移数据，优化为分批处理
 func (h *Heartbeat) migrateData(failedNode string) {
 	h.infoLogger.Printf("Starting data migration from failed node %s", failedNode)
-
-	// 获取本地缓存所有数据
-	allData := h.cache.GetAll()
-	var batch []struct {
-		Key   string `json:"key"`
-		Value string `json:"value"`
-	}
-
-	// 筛选需要迁移的键值对
-	for key, value := range allData {
-		oldNode := h.ring.GetNodeForKeyBeforeRemoval(key, failedNode)
-		if oldNode == failedNode {
-			newNode := h.ring.GetNode(key)
-			if newNode != h.localAddr { // 只迁移到非本地节点
-				batch = append(batch, struct {
-					Key   string `json:"key"`
-					Value string `json:"value"`
-				}{key, value})
-			}
-		}
-	}
+    allData := h.cache.GetAll()
+    var batch []struct {
+        Key   string `json:"key"`
+        Value string `json:"value"`
+    }
+    for key, value := range allData {
+        oldNode := h.ring.GetNodeForKeyBeforeRemoval(key, failedNode)
+        if oldNode == failedNode {
+            newNode := h.ring.GetNode(key)
+            if newNode != h.localAddr {
+                batch = append(batch, struct {
+                    Key   string `json:"key"`
+                    Value string `json:"value"`
+                }{key, value})
+                h.infoLogger.Printf("Migrating key=%s from %s to %s", key, failedNode, newNode)
+            }
+        }
+    }
 
 	// 分批迁移，减轻请求压力
 	if len(batch) > 0 {
@@ -219,4 +235,25 @@ func (h *Heartbeat) CheckHealth(node string) (*Response, error) {
 // Response 定义健康检查响应结构
 type Response struct {
 	Status string `json:"status"`
+}
+
+// EnableChaos 启用混沌测试
+func (h *Heartbeat) EnableChaos(rate float32) {
+    if rate < 0 || rate > 1 {
+        h.errorLogger.Printf("Invalid failure rate %.2f, must be between 0 and 1", rate)
+        return
+    }
+    h.chaosEnabled = true
+    h.failureRate = rate
+    h.infoLogger.Printf("Chaos testing enabled with failure rate %.2f", rate)
+}
+
+// DisableChaos 禁用混沌测试
+func (h *Heartbeat) DisableChaos() {
+    h.chaosEnabled = false
+    h.infoLogger.Printf("Chaos testing disabled")
+}
+
+func (h *Heartbeat) SetFailureCount(node string, count int) {
+    h.failures[node] = count
 }

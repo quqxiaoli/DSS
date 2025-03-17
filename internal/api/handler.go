@@ -41,7 +41,7 @@ func (w gzipResponseWriter) Write(b []byte) (int, error) {
 
 // SetupRoutes 设置所有API路由
 func SetupRoutes(ring *cache.HashRing, localCache *cache.Cache, getCh chan GetRequest, nodes []string, localAddr, apiKey string, logger *util.Logger, hb *cache.Heartbeat) {
-	http.HandleFunc("/health", makeHealthHandler(apiKey, logger))
+	http.HandleFunc("/health", makeHealthHandler(apiKey, logger, hb, localAddr)) // 传入 localAddr
 	http.HandleFunc("/sync", makeSyncHandler(apiKey, localCache, logger))
 	http.HandleFunc("/set", makeSetHandler(ring, localCache, nodes, localAddr, apiKey, logger))
 	http.HandleFunc("/get", makeGetHandler(ring, getCh, localAddr, apiKey, logger))
@@ -50,50 +50,84 @@ func SetupRoutes(ring *cache.HashRing, localCache *cache.Cache, getCh chan GetRe
 	http.HandleFunc("/batch_set", makeBatchSetHandler(ring, localCache, nodes, localAddr, apiKey, logger, hb))
 }
 
-func makeHealthHandler(apiKey string, logger *util.Logger) http.HandlerFunc {
+func makeHealthHandler(apiKey string, logger *util.Logger, hb *cache.Heartbeat, localAddr string) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Query().Get("api_key") != apiKey {
-			logger.Error("Invalid API key for health check: %s", r.URL.Query().Get("api_key"))
-			writeJSON(w, http.StatusUnauthorized, Response{Error: "Invalid API key"}, logger)
-			return
-		}
+        if r.URL.Query().Get("api_key") != apiKey {
+            logger.Error("Invalid API key for health check: %s", r.URL.Query().Get("api_key"))
+            writeJSON(w, http.StatusUnauthorized, Response{Error: "Invalid API key"}, logger)
+            return
+        }
+        // 检查本地节点健康状态
+        if !hb.IsNodeHealthy(localAddr) {
+            logger.Error("Local node %s is unhealthy", localAddr)
+            writeJSON(w, http.StatusServiceUnavailable, Response{Status: "unhealthy"}, logger)
+            return
+        }
 		writeJSON(w, http.StatusOK, Response{Status: "ok"}, logger)
 	}
 }
 
 func makeSyncHandler(apiKey string, localCache *cache.Cache, logger *util.Logger) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		if r.URL.Query().Get("api_key") != apiKey {
-			logger.Error("Invalid API key: %s", r.URL.Query().Get("api_key"))
-			writeJSON(w, http.StatusUnauthorized, Response{Error: "Invalid API key"}, logger)
-			return
-		}
-		// 支持批量和单键值对的兼容
-		var body interface{}
-		if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
-			writeJSON(w, http.StatusBadRequest, Response{Error: "Invalid request body"}, logger)
-			return
-		}
-		switch v := body.(type) {
-		case map[string]interface{}: // 单键值对（旧格式）
-			key := v["key"].(string)
-			value := v["value"].(string)
-			logger.InfoNoLimit("Sync received: key=%s, value=%s", key, value)
-			localCache.Set(key, value)
-		case []interface{}: // 批量键值对（新格式）
-			for _, item := range v {
-				pair := item.(map[string]interface{})
-				key := pair["key"].(string)
-				value := pair["value"].(string)
-				logger.InfoNoLimit("Sync received: key=%s, value=%s", key, value)
-				localCache.Set(key, value)
-			}
-		default:
-			writeJSON(w, http.StatusBadRequest, Response{Error: "Unsupported request body format"}, logger)
-			return
-		}
-		writeJSON(w, http.StatusOK, Response{Status: "ok"}, logger)
-	}
+    return func(w http.ResponseWriter, r *http.Request) {
+        if r.URL.Query().Get("api_key") != apiKey {
+            logger.Error("Invalid API key: %s", r.URL.Query().Get("api_key"))
+            writeJSON(w, http.StatusUnauthorized, Response{Error: "Invalid API key"}, logger)
+            return
+        }
+
+        var body interface{}
+        if err := json.NewDecoder(r.Body).Decode(&body); err != nil {
+            writeJSON(w, http.StatusBadRequest, Response{Error: "Invalid request body"}, logger)
+            return
+        }
+
+        switch v := body.(type) {
+        case map[string]interface{}: // 单键值对
+            key, ok := v["key"].(string)
+            if !ok || key == "" {
+                writeJSON(w, http.StatusBadRequest, Response{Error: "Key cannot be empty or invalid"}, logger)
+                return
+            }
+            value, ok := v["value"].(string)
+            if !ok || value == "" {
+                writeJSON(w, http.StatusBadRequest, Response{Error: "Value cannot be empty or invalid"}, logger)
+                return
+            }
+            logger.InfoNoLimit("Sync received: key=%s, value=%s", key, value)
+            localCache.Set(key, value)
+            writeJSON(w, http.StatusOK, Response{Status: "ok", Key: key, Value: value}, logger)
+        case []interface{}: // 批量键值对
+            if len(v) == 0 {
+                writeJSON(w, http.StatusBadRequest, Response{Error: "Batch cannot be empty"}, logger)
+                return
+            }
+            results := make([]Response, len(v))
+            for i, item := range v {
+                pair, ok := item.(map[string]interface{})
+                if !ok {
+                    results[i] = Response{Error: "Invalid pair format"}
+                    continue
+                }
+                key, ok := pair["key"].(string)
+                if !ok || key == "" {
+                    results[i] = Response{Error: "Key cannot be empty or invalid"}
+                    continue
+                }
+                value, ok := pair["value"].(string)
+                if !ok || value == "" {
+                    results[i] = Response{Error: "Value cannot be empty or invalid"}
+                    continue
+                }
+                logger.InfoNoLimit("Sync received: key=%s, value=%s", key, value)
+                localCache.Set(key, value)
+                results[i] = Response{Status: "ok", Key: key, Value: value}
+            }
+            writeJSON(w, http.StatusOK, results, logger)
+        default:
+            writeJSON(w, http.StatusBadRequest, Response{Error: "Unsupported request body format"}, logger)
+            return
+        }
+    }
 }
 
 func makeSetHandler(ring *cache.HashRing, localCache *cache.Cache, nodes []string, localAddr, apiKey string, logger *util.Logger) http.HandlerFunc {

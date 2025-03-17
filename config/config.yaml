@@ -6,3 +6,6 @@ nodes:
   - "127.0.0.1:8081"
   - "127.0.0.1:8082"
 logging: "cache_{port}.log"
+chaos:
+  enabled: true
+  failure_rate: 0.3
