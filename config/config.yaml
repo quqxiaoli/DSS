@@ -7,5 +7,5 @@ nodes:
   - "127.0.0.1:8082"
 logging: "cache_{port}.log"
 chaos:
-  enabled: true
+  enabled: false
   failure_rate: 0.3

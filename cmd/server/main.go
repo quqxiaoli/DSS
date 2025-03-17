@@ -1,6 +1,9 @@
 package main
 
 import (
+	"context"
+	"os/signal"
+	"syscall"
 	"crypto/tls"
 	"flag"
 	"fmt"
@@ -74,10 +77,10 @@ func main() {
 	// 启动一个 goroutine 来启动心跳机制。
 	go hb.Start()
 
-	// 启用混沌测试
-    if cfg.Chaos.Enabled {
-        hb.EnableChaos(cfg.Chaos.FailureRate)
-    }
+	// // 启用混沌测试
+     if cfg.Chaos.Enabled {
+         hb.EnableChaos(cfg.Chaos.FailureRate)
+     }
 
 	// 设置 HTTP 路由，处理各种请求。
 	api.SetupRoutes(ring, localCache, getCh, cfg.Nodes, localAddr, cfg.Server.APIKey, logger, hb)
@@ -111,13 +114,25 @@ func main() {
 		IdleTimeout: 20 * time.Second,
 	}
 
-	// 打印服务器启动信息，包含端口号。
-	fmt.Printf("Server running on https://localhost:%s\n", *port)
-	// 启动 TLS 服务器，使用指定的证书和私钥。
-	err = server.ListenAndServeTLS("config/cert.pem", "config/key.pem")
-	// 检查服务器启动是否失败，如果失败则记录错误并终止程序。
-	if err != nil {
-		logger.Error("Failed to start TLS server: %v", err)
-		os.Exit(1)
-	}
+	// 优雅关闭
+    stop := make(chan os.Signal, 1)
+    signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
+
+    go func() {
+        fmt.Printf("Server running on https://localhost:%s\n", *port)
+        if err := server.ListenAndServeTLS("config/cert.pem", "config/key.pem"); err != nil && err != http.ErrServerClosed {
+            logger.Error("Failed to start TLS server: %v", err)
+            os.Exit(1)
+        }
+    }()
+
+    <-stop
+    logger.Info("Shutting down server...")
+
+    ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
+    defer cancel()
+    if err := server.Shutdown(ctx); err != nil {
+        logger.Error("Server shutdown failed: %v", err)
+    }
+    logger.Info("Server gracefully stopped")
 }
