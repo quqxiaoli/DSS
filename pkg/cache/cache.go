@@ -2,6 +2,7 @@ package cache
 
 import (
 	"container/list"
+	"log"
 	"sync"
 	"time"
 )
@@ -179,9 +180,41 @@ func (c *Cache) Get(key string) (string, bool) {
 		return "", false
 	}
 
+	log.Printf("Cache Get: key=%s, value=%s, exists=true", key, item.Value)
 	// 将该缓存项移动到链表头部，表示最近访问
 	c.list.MoveToFront(elem)
 	// 缓存命中计数加 1
 	CacheHits.Add(1)
 	return item.Value, true
+}
+
+func (c *Cache) SetWithTTL(key, value string, ttl time.Duration) {
+    c.mu.Lock()
+    defer c.mu.Unlock()
+	log.Printf("Cache SetWithTTL: key=%s, value=%s, ttl=%v", key, value, ttl)
+
+    if elem, exists := c.data[key]; exists {
+        c.list.MoveToFront(elem)
+        item := elem.Value.(*CacheItem)
+        item.Value = value
+        item.ExpiresAt = time.Now().Add(ttl)
+        return
+    }
+
+    if c.list.Len() >= c.capacity {
+        oldest := c.list.Back()
+        if oldest != nil {
+            c.list.Remove(oldest)
+            oldItem := oldest.Value.(*CacheItem)
+            delete(c.data, oldItem.Key)
+        }
+    }
+
+    item := &CacheItem{
+        Key:       key,
+        Value:     value,
+        ExpiresAt: time.Now().Add(ttl),
+    }
+    elem := c.list.PushFront(item)
+    c.data[key] = elem
 }

@@ -15,6 +15,66 @@ import (
 	"github.com/quqxiaoli/distributed-cache/pkg/cache"
 )
 
+// RateLimitConfig 定义限流配置
+type RateLimitConfig struct {
+    RatePerSecond int // 每秒允许的请求数
+}
+
+// RateLimiter 结构体
+type RateLimiter struct {
+    cache  *cache.Cache
+    config RateLimitConfig
+    logger *util.Logger
+    mu     sync.Mutex
+}
+
+// NewRateLimiter 创建限流器
+func NewRateLimiter(cache *cache.Cache, config RateLimitConfig, logger *util.Logger) *RateLimiter {
+    return &RateLimiter{
+        cache:  cache,
+        config: config,
+        logger: logger,
+    }
+}
+
+// Middleware 限流中间件（固定窗口计数器）
+func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        clientIP := r.RemoteAddr
+        // 只使用 IP，不含端口
+        ipOnly := clientIP[:strings.LastIndex(clientIP, ":")]
+        key := "rate_limit:" + ipOnly + ":" + time.Now().Truncate(time.Second).Format("20060102T150405")
+
+        rl.mu.Lock()
+        defer rl.mu.Unlock()
+
+        rl.logger.InfoNoLimit("Rate limiter triggered for %s, key=%s", clientIP, key)
+        data, exists := rl.cache.Get(key)
+        var count int
+        if exists {
+            if err := json.Unmarshal([]byte(data), &count); err != nil {
+                rl.logger.Error("Failed to unmarshal rate limit count for %s: %v", key, err)
+                writeJSON(w, http.StatusInternalServerError, Response{Error: "Internal server error"}, rl.logger)
+                return
+            }
+        }
+
+        rl.logger.InfoNoLimit("Current count: %d, exists: %v", count, exists)
+        if count >= rl.config.RatePerSecond {
+            rl.logger.InfoNoLimit("Rate limit exceeded for %s, count: %d", clientIP, count)
+            writeJSON(w, http.StatusTooManyRequests, Response{Error: "Rate limit exceeded"}, rl.logger)
+            return
+        }
+
+        count++
+        countData, _ := json.Marshal(count)
+        rl.cache.SetWithTTL(key, string(countData), time.Second)
+        rl.logger.InfoNoLimit("Request allowed, new count: %d", count) // 移动到 SetWithTTL 后
+        next.ServeHTTP(w, r)
+    })
+}
+
+
 // GzipHandler 启用GZIP压缩，提升响应效率
 func GzipHandler(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -41,13 +101,22 @@ func (w gzipResponseWriter) Write(b []byte) (int, error) {
 
 // SetupRoutes 设置所有API路由
 func SetupRoutes(ring *cache.HashRing, localCache *cache.Cache, getCh chan GetRequest, nodes []string, localAddr, apiKey string, logger *util.Logger, hb *cache.Heartbeat) {
-	http.HandleFunc("/health", makeHealthHandler(apiKey, logger, hb, localAddr)) // 传入 localAddr
-	http.HandleFunc("/sync", makeSyncHandler(apiKey, localCache, logger))
-	http.HandleFunc("/set", makeSetHandler(ring, localCache, nodes, localAddr, apiKey, logger))
-	http.HandleFunc("/get", makeGetHandler(ring, getCh, localAddr, apiKey, logger))
-	http.HandleFunc("/delete", makeDeleteHandler(ring, localCache, localAddr, apiKey, logger))
-	http.HandleFunc("/batch_get", makeBatchGetHandler(ring, getCh, localAddr, apiKey, logger))
-	http.HandleFunc("/batch_set", makeBatchSetHandler(ring, localCache, nodes, localAddr, apiKey, logger, hb))
+	rateLimiter := NewRateLimiter(localCache, RateLimitConfig{
+        RatePerSecond: 10, // 每秒 10 个请求
+    }, logger)
+
+    // 使用新 ServeMux 以支持中间件
+    mux := http.NewServeMux()
+    mux.Handle("/health", rateLimiter.Middleware(makeHealthHandler(apiKey, logger, hb, localAddr)))
+    mux.Handle("/sync", rateLimiter.Middleware(makeSyncHandler(apiKey, localCache, logger)))
+    mux.Handle("/set", rateLimiter.Middleware(makeSetHandler(ring, localCache, nodes, localAddr, apiKey, logger)))
+    mux.Handle("/get", rateLimiter.Middleware(makeGetHandler(ring, getCh, localAddr, apiKey, logger)))
+    mux.Handle("/delete", rateLimiter.Middleware(makeDeleteHandler(ring, localCache, localAddr, apiKey, logger)))
+    mux.Handle("/batch_get", rateLimiter.Middleware(makeBatchGetHandler(ring, getCh, localAddr, apiKey, logger)))
+    mux.Handle("/batch_set", rateLimiter.Middleware(makeBatchSetHandler(ring, localCache, nodes, localAddr, apiKey, logger, hb)))
+
+    // 应用 GzipHandler 到整个 mux
+    http.Handle("/", GzipHandler(mux))
 }
 
 func makeHealthHandler(apiKey string, logger *util.Logger, hb *cache.Heartbeat, localAddr string) http.HandlerFunc {
