@@ -22,3 +22,26 @@ Developed over 21 days (March 4–24, 2025) as part of a Minimum Viable Product 
   - TTL (Time-To-Live) for cache entries.
   - Monitoring and performance optimization.
   - Practical application: API rate limiter.
+
+  ## Architecture
+
+The system follows a modular, distributed design with the following components:
+
+- **Single Node Cache**: An in-memory key-value store with LRU eviction and TTL support, implemented using a `map` and doubly-linked list (`container/list`).
+- **Consistent Hash Ring**: Distributes keys across nodes using the FNV-1a hash algorithm, enhanced with virtual nodes for load balancing.
+- **HTTP Server**: Handles client requests (`/set`, `/get`, `/delete`, `/batch_get`, `/batch_set`) and forwards them to appropriate nodes using consistent hashing.
+- **Node Communication**: Nodes communicate via TLS-encrypted HTTP requests, with data synchronization (`/sync`) and health checks (`/health`).
+- **Heartbeat Mechanism**: Detects node failures and triggers data migration to maintain availability.
+- **Rate Limiter**: An example application using the cache to enforce API rate limits with a fixed-window counter.
+
+### Directory Structure
+
+cache-system/
+├── cmd/server/         # Entry point (main.go)
+├── config/            # Configuration files (config.yaml, config.go)
+├── pkg/cache/         # Core cache logic (cache.go, consistent.go, heartbeat.go, metrics.go)
+├── internal/api/      # API handlers and types (handler.go, types.go)
+├── internal/util/     # Utilities (logger.go, httpclient.go)
+├── logs/              # Log files
+├── go.mod             # Go module file
+└── README.md          # Project documentation
