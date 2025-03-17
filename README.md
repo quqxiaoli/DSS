@@ -1,47 +1,40 @@
 # Distributed Cache System
 
-A production-ready distributed caching system built from scratch in Go, designed to handle high concurrency, scalability, and fault tolerance. This project implements a key-value store with advanced features such as consistent hashing, LRU eviction, TTL, node failure detection, and observability, making it suitable for real-world applications like API rate limiting.
+## 项目概述
 
-Developed over 21 days (March 4–24, 2025) as part of a Minimum Viable Product (MVP) with additional high-level features, this project showcases strong engineering practices and problem-solving skills for campus recruitment at top-tier companies.
+这是一个高性能的分布式缓存系统，旨在提供键值存储服务，支持高并发访问、动态节点管理以及容灾能力，适用于需要低延迟和高可用性的场景。项目通过分布式架构和一致性哈希算法，有效减轻数据库压力并提升系统响应速度。
 
-## Project Goals
+项目灵感来源于分布式系统中缓存的重要性，目标是通过 21 天开发一个具备生产级特性的最小可行产品（MVP），并在校招中展示个人对分布式系统设计与实现的理解。
 
-- Build a production-grade distributed caching system with an MVP and advanced features.
-- Core functionalities:
-  - **Key-Value Storage**: Basic `/set`, `/get`, and `/delete` operations via HTTP.
-  - **High Concurrency**: Thread-safe operations using Goroutines and Channels.
-  - **Consistent Hashing**: Even data distribution across nodes.
-  - **HTTP Interface**: RESTful API with JSON responses.
-  - **LRU Eviction**: Memory management with Least Recently Used policy.
-  - **Fault Tolerance**: Node failure detection via heartbeat mechanism.
-  - **Observability**: Metrics like hit rate and latency.
-  - **Security**: API key authentication and TLS encryption.
-- Highlights:
-  - Concurrent-safe design.
-  - Dynamic node management.
-  - TTL (Time-To-Live) for cache entries.
-  - Monitoring and performance optimization.
-  - Practical application: API rate limiter.
+- **开发时间**：2025 年 3 月 4 日 - 3 月 24 日（21 天，每天 5-7 小时）
+- **主要成果**：实现了单机缓存到分布式缓存的完整功能，包括 HTTP 接口、一致性哈希、LRU 淘汰、TTL、监控等特性，并通过 Docker 支持部署。
 
-  ## Architecture
+## 功能特性
 
-The system follows a modular, distributed design with the following components:
+- **键值存储**：支持基本的 `/set`、`/get`、`/delete` 操作，提供高效的键值对存储和访问，通过本地缓存实现 O(1) 时间复杂度。
+- **高并发支持**：通过 Goroutine、Channel 和 sync.Mutex 实现并发安全，适用于多用户场景，使用 Channel 同步请求处理。
+- **一致性哈希**：使用一致性哈希算法和虚拟节点实现数据均匀分布和动态扩展，基于 FNV-1a 哈希算法优化分布。
+- **HTTP 接口**：提供 RESTful API，支持 JSON 格式响应和批量操作（`/batch_get`、`/batch_set`），通过 Gzip 压缩提升响应效率。
+- **LRU 淘汰**：实现基于 map 和双向链表的 LRU 缓存淘汰策略，优化内存使用，支持动态容量管理。
+- **TTL 支持**：为缓存项设置过期时间（默认 5 秒），自动清理过期数据，定时任务每 10 秒检查一次。
+- **容灾能力**：通过心跳机制检测节点故障并进行数据迁移，确保系统高可用，每 30 秒检查节点健康状态。
+- **可观测性**：集成 expvar 暴露缓存命中率和延迟指标，支持性能监控，可通过 `/debug/vars` 查看。
+- **安全性**：支持 API 密钥校验和 TLS 加密通信，保障数据安全，使用自签名证书实现 HTTPS。
 
-- **Single Node Cache**: An in-memory key-value store with LRU eviction and TTL support, implemented using a `map` and doubly-linked list (`container/list`).
-- **Consistent Hash Ring**: Distributes keys across nodes using the FNV-1a hash algorithm, enhanced with virtual nodes for load balancing.
-- **HTTP Server**: Handles client requests (`/set`, `/get`, `/delete`, `/batch_get`, `/batch_set`) and forwards them to appropriate nodes using consistent hashing.
-- **Node Communication**: Nodes communicate via TLS-encrypted HTTP requests, with data synchronization (`/sync`) and health checks (`/health`).
-- **Heartbeat Mechanism**: Detects node failures and triggers data migration to maintain availability.
-- **Rate Limiter**: An example application using the cache to enforce API rate limits with a fixed-window counter.
+## 系统架构
 
-### Directory Structure
+## 技术栈
 
-cache-system/
-├── cmd/server/         # Entry point (main.go)
-├── config/            # Configuration files (config.yaml, config.go)
-├── pkg/cache/         # Core cache logic (cache.go, consistent.go, heartbeat.go, metrics.go)
-├── internal/api/      # API handlers and types (handler.go, types.go)
-├── internal/util/     # Utilities (logger.go, httpclient.go)
-├── logs/              # Log files
-├── go.mod             # Go module file
-└── README.md          # Project documentation
+## 使用方法
+
+## 性能测试
+
+## CAP 理论讨论
+
+## 项目亮点与技术挑战
+
+## 快速开始
+
+## 贡献指南
+
+## 许可证
