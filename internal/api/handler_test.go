@@ -17,7 +17,7 @@ func TestSetHandler(t *testing.T) {
     defer logger.Close()
     ring := cache.NewHashRing(10)
     ring.AddNode("127.0.0.1:8080") // 添加本地节点，确保哈希命中
-    localCache := cache.NewCache(10)
+    localCache := cache.NewCache(10, logger)
     nodes := []string{"127.0.0.1:8080"}
     localAddr := "127.0.0.1:8080"
     apiKey := "my-secret-key"
@@ -51,7 +51,7 @@ func TestGetHandler(t *testing.T) {
     defer logger.Close()
     ring := cache.NewHashRing(10)
     ring.AddNode("127.0.0.1:8080") // 添加本地节点，确保哈希命中
-    localCache := cache.NewCache(10)
+    localCache := cache.NewCache(10, logger)
     getCh := make(chan GetRequest, 10)
     localAddr := "127.0.0.1:8080"
     apiKey := "my-secret-key"
@@ -98,7 +98,7 @@ func TestHealthHandler(t *testing.T) {
     // 初始化 Heartbeat 和 localAddr
     ring := cache.NewHashRing(100)
     localAddr := "127.0.0.1:8080"
-    hb := cache.NewHeartbeat(ring, localAddr, apiKey, logger.InfoLogger(), logger.ErrorLogger(), cache.NewCache(100))
+    hb := cache.NewHeartbeat(ring, localAddr, apiKey, logger.InfoLogger(), logger.ErrorLogger(), cache.NewCache(100, logger))
 
     // 创建 handler，添加 hb 和 localAddr 参数
     handler := makeHealthHandler(apiKey, logger, hb, localAddr)
@@ -166,7 +166,7 @@ func TestDeleteHandler(t *testing.T) {
     defer logger.Close()
     ring := cache.NewHashRing(10)
     ring.AddNode("127.0.0.1:8080") // 确保本地处理
-    localCache := cache.NewCache(10)
+    localCache := cache.NewCache(10, logger)
     localAddr := "127.0.0.1:8080"
     apiKey := "my-secret-key"
 
@@ -225,7 +225,7 @@ func TestBatchGetHandler(t *testing.T) {
     defer logger.Close()
     ring := cache.NewHashRing(10)
     ring.AddNode("127.0.0.1:8080") // 确保本地处理
-    localCache := cache.NewCache(10)
+    localCache := cache.NewCache(10, logger)
     localAddr := "127.0.0.1:8080"
     apiKey := "my-secret-key"
     getCh := make(chan GetRequest, 10) // 与 main.go 一致
@@ -296,7 +296,7 @@ func TestBatchSetHandler(t *testing.T) {
     defer logger.Close()
     ring := cache.NewHashRing(10)
     ring.AddNode("127.0.0.1:8080")
-    localCache := cache.NewCache(10)
+    localCache := cache.NewCache(10, logger)
     localAddr := "127.0.0.1:8080"
     apiKey := "my-secret-key"
     nodes := []string{"127.0.0.1:8080"}
@@ -365,7 +365,7 @@ func TestSyncHandler(t *testing.T) {
         t.Fatalf("Failed to create logger: %v", err)
     }
     defer logger.Close()
-    localCache := cache.NewCache(10)
+    localCache := cache.NewCache(10, logger)
     apiKey := "my-secret-key"
     handler := makeSyncHandler(apiKey, localCache, logger)
 

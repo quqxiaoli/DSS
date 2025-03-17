@@ -128,7 +128,7 @@ func (h *Heartbeat) Start() {
 
 // migrateData 从失败节点迁移数据，优化为分批处理
 func (h *Heartbeat) migrateData(failedNode string) {
-	h.infoLogger.Printf("Starting data migration from failed node %s", failedNode)
+    h.infoLogger.Printf("Starting data migration from failed node %s", failedNode)
     allData := h.cache.GetAll()
     var batch []struct {
         Key   string `json:"key"`

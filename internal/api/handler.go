@@ -48,7 +48,8 @@ func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
         rl.mu.Lock()
         defer rl.mu.Unlock()
 
-        rl.logger.InfoNoLimit("Rate limiter triggered for %s, key=%s", clientIP, key)
+		// 注释掉调试日志
+        //rl.logger.InfoNoLimit("Rate limiter triggered for %s, key=%s", clientIP, key)
         data, exists := rl.cache.Get(key)
         var count int
         if exists {
@@ -59,7 +60,7 @@ func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
             }
         }
 
-        rl.logger.InfoNoLimit("Current count: %d, exists: %v", count, exists)
+        //rl.logger.InfoNoLimit("Current count: %d, exists: %v", count, exists)
         if count >= rl.config.RatePerSecond {
             rl.logger.InfoNoLimit("Rate limit exceeded for %s, count: %d", clientIP, count)
             writeJSON(w, http.StatusTooManyRequests, Response{Error: "Rate limit exceeded"}, rl.logger)
@@ -69,7 +70,7 @@ func (rl *RateLimiter) Middleware(next http.Handler) http.Handler {
         count++
         countData, _ := json.Marshal(count)
         rl.cache.SetWithTTL(key, string(countData), time.Second)
-        rl.logger.InfoNoLimit("Request allowed, new count: %d", count) // 移动到 SetWithTTL 后
+        //rl.logger.InfoNoLimit("Request allowed, new count: %d", count) // 移动到 SetWithTTL 后
         next.ServeHTTP(w, r)
     })
 }

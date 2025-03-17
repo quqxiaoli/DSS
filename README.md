@@ -21,3 +21,29 @@ A production-ready distributed caching system built from scratch in 21 days usin
 - **Batch Operations**: `/mget` and `/mset` for efficient multi-key operations.
 - **Testing**: Unit tests, HTTP tests, and chaos testing for reliability.
 - **Deployment**: Dockerized with graceful shutdown support.
+
+## Usage
+
+### Running the Server
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd cache-system
+2. Run with default config:
+   ```bash
+   go run cmd/server/main.go -port=8080
+
+### API Endpoints
+
+All endpoints require an `api_key` query parameter for authentication (default: `my-secret-key`, configurable in `config.yaml`). Responses are returned in JSON format with GZIP compression enabled by default. Below are the supported endpoints with examples and implementation details.
+
+#### 1. Set a Key (`/set`)
+- **Method**: `POST`
+- **URL**: `/set?api_key=<your-api-key>`
+- **Body**: JSON object with `key` and `value` fields.
+- **Description**: Stores a key-value pair in the distributed cache. The request is routed to the appropriate node using consistent hashing, and data is broadcast to other nodes for synchronization.
+- **Request Example**:
+  ```bash
+  curl -X POST "https://localhost:8080/set?api_key=my-secret-key" \
+       -H "Content-Type: application/json" \
+       -d '{"key":"user:1","value":"Alice"}'

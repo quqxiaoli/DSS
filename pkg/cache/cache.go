@@ -2,9 +2,9 @@ package cache
 
 import (
 	"container/list"
-	"log"
 	"sync"
 	"time"
+	"github.com/quqxiaoli/distributed-cache/internal/util" // 引入 util 包
 )
 
 // CacheItem 表示缓存中的一个条目，包含键、值和过期时间。
@@ -22,10 +22,11 @@ type Cache struct {
 	list     *list.List
 	capacity int
 	mu       sync.Mutex
+	logger   *util.Logger // 新增 logger 字段
 }
 
 // NewCache 创建一个新的缓存实例，接收一个整数参数 capacity 表示缓存的最大容量。
-func NewCache(capacity int) *Cache {
+func NewCache(capacity int, logger *util.Logger) *Cache {
 	// 初始化一个 Cache 结构体指针
 	c := &Cache{
 		// 初始化 data 映射，用于存储缓存项的键和对应的双向链表元素
@@ -33,6 +34,7 @@ func NewCache(capacity int) *Cache {
 		// 初始化双向链表，用于维护缓存项的访问顺序
 		list:     list.New(),
 		capacity: capacity,
+		logger:   logger,
 	}
 	// 启动一个协程，定期清理过期的缓存项，清理间隔为 10 秒
 	go c.startCleanup(10 * time.Second)
@@ -180,7 +182,7 @@ func (c *Cache) Get(key string) (string, bool) {
 		return "", false
 	}
 
-	log.Printf("Cache Get: key=%s, value=%s, exists=true", key, item.Value)
+	c.logger.Info("Cache Get: key=%s, value=%s, exists=true", key, item.Value)
 	// 将该缓存项移动到链表头部，表示最近访问
 	c.list.MoveToFront(elem)
 	// 缓存命中计数加 1
@@ -191,7 +193,7 @@ func (c *Cache) Get(key string) (string, bool) {
 func (c *Cache) SetWithTTL(key, value string, ttl time.Duration) {
     c.mu.Lock()
     defer c.mu.Unlock()
-	log.Printf("Cache SetWithTTL: key=%s, value=%s, ttl=%v", key, value, ttl)
+	c.logger.Info("Cache SetWithTTL: key=%s, value=%s, ttl=%v", key, value, ttl)
 
     if elem, exists := c.data[key]; exists {
         c.list.MoveToFront(elem)

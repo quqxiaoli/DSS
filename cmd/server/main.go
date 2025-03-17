@@ -46,7 +46,7 @@ func main() {
 	logger.Info("Starting distributed cache server on port %s", *port)
 
 	// 创建一个容量为 100 的本地缓存实例。
-	localCache := cache.NewCache(100)
+	localCache := cache.NewCache(100, logger)
 	// 创建一个缓冲通道，用于接收 GetRequest 请求。
 	getCh := make(chan api.GetRequest, 10)
 	// 启动一个 goroutine 来处理 getCh 通道中的请求。
@@ -119,7 +119,7 @@ func main() {
     signal.Notify(stop, syscall.SIGINT, syscall.SIGTERM)
 
     go func() {
-        fmt.Printf("Server running on https://localhost:%s\n", *port)
+        logger.Info("Server running on https://localhost:%s", *port) // 改为 logger 输出
         if err := server.ListenAndServeTLS("config/cert.pem", "config/key.pem"); err != nil && err != http.ErrServerClosed {
             logger.Error("Failed to start TLS server: %v", err)
             os.Exit(1)

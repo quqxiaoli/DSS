@@ -4,11 +4,25 @@ import (
 	"hash/fnv"
 	"testing"
 	"time"
+    "github.com/quqxiaoli/distributed-cache/internal/util" // 导入 util 包
 )
+
+var logger *util.Logger
+
+func TestMain(m *testing.M) {
+    var err error
+    logger, err = util.NewLogger("logs/cache_test.log")
+    if err != nil {
+        panic("Failed to initialize logger: " + err.Error())
+    }
+    defer logger.Close()
+    m.Run()
+}
 
 // 测试 Set 和 Get
 func TestCacheSetGet(t *testing.T) {
-	c := NewCache(2)
+    
+	c := NewCache(2, logger)
 	c.Set("key1", "value1")
 	val, exists := c.Get("key1")
 	if !exists {
@@ -21,7 +35,7 @@ func TestCacheSetGet(t *testing.T) {
 
 //测试TTL
 func TestCacheTTL(t *testing.T) {
-	c := NewCache(2)
+	c := NewCache(2, logger)
 	c.Set("key1", "value1")
     time.Sleep(6 * time.Second) // 等待 6 秒，超过 5 秒 TTL
     _, exists := c.Get("key1")
@@ -32,7 +46,7 @@ func TestCacheTTL(t *testing.T) {
 
 // 测试 LRU 淘汰
 func TestCacheLRU(t *testing.T) {
-    c := NewCache(2) // 容量为 2
+    c := NewCache(2, logger) // 容量为 2
     c.Set("key1", "value1")
     c.Set("key2", "value2")
     c.Set("key3", "value3") // 超出容量，key1 应被淘汰
